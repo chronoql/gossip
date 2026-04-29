@@ -46,3 +46,6 @@ Chronoql Gossip is built as a standalone desktop application, but it actively re
 - **Zero Internet Required:** The application is driven entirely by a robust, locally managed database.
 - **Strict Separation of Concerns:** The UI is built with native HTML5, CSS3, and Vanilla JavaScript.
 - **High-Contrast Accessibility:** The interface is engineered for long coding sessions, prioritizing readable typography, distinct visual hierarchies, and low-fatigue interaction design.
+
+## Get the app:     [Download gossip here](gethub.com/chronoql/gossip/releases)
+
