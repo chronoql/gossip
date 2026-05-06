@@ -6,7 +6,7 @@ Whether you are a seasoned data engineer orchestrating complex systems or an ent
 
 **Chronoql Gossip** is a desktop operating environment designed to solve the "context window" problem. It provides a suite of visual, offline-first tools to help you define strict architectural boundaries, compress your codebase into optimized LLM prompts, and safely integrate AI-generated payloads back into your local file system.
 
-Everything happens locally. No cloud syncs, no telemetry, no internet required. Your codebase and your architecture remain entirely sovereign.
+Everything happens locally. No cloud syncs, no telemetry getting sent to remote servers, no internet required. Your codebase and your architecture remain entirely sovereign.
 
 ------
 
@@ -34,7 +34,7 @@ Chronoql Gossip is divided into distinct operational domains to help you manage 
 
 ### System Administration
 
-- **Workspace Hub:** Manage multiple, isolated project environments (Multi-Tenancy). Track your token consumption over time with visual telemetry charts to understand the true ROI of your AI-assisted workflows.
+- **Workspace Hub:** Manage multiple, isolated project environments (Multi-Tenancy). There are color charts that help you visualize your token consumption over time to understand the true ROI of your AI-assisted workflows.
 - **Data Management:** Total data sovereignty. Instantly generate, export, and restore compressed `.zip` backups of your entire data ecosystem with a single click.
 
 ------
