@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chronoql Gossip - Kanban Orchestration</title>
+</head>
+<body>
+    <main class="kanban-orchestrator-view" id="kanban-main-view">
+        
+        <header class="kanban-header">
+            <div class="project-controls">
+                <select id="project-selector-input" aria-label="Select Kanban Project"></select>
+                
+                <button id="btn-promote-board" class="btn-primary btn-promote-special" data-tooltip="Promote Quick Tasks to a dedicated project" style="display: none;">Promote</button>
+                <button id="btn-new-project" class="btn-primary" data-tooltip="Create a new Kanban board">New Project</button>
+                <button id="btn-duplicate-project" class="btn-secondary" data-tooltip="Duplicate this board">Duplicate</button>
+                <button id="btn-edit-project" class="btn-secondary" data-tooltip="Modify board settings and background">Settings</button>
+                <button id="btn-delete-project" class="btn-danger" data-tooltip="Permanently delete this project">Delete</button>
+            </div>
+            
+            <div class="academic-integration-controls" style="display: none;">
+                <label for="course-link-selector">Linked Module:</label>
+                <select id="course-link-selector" aria-label="Link to Module"></select>
+            </div>
+        </header>
+
+        <section class="kanban-board-canvas" id="kanban-board-canvas">
+            <div class="kanban-add-column-wrapper">
+                <button id="btn-add-column" data-tooltip="Add New Column">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+        <dialog id="kanban-input-modal">
+            <div class="modal-header">
+                <h3 id="kanban-modal-title">Input Required</h3>
+            </div>
+            <div class="modal-body">
+                <div class="form-group" id="kanban-modal-primary-group">
+                    <label id="kanban-modal-label" for="kanban-modal-input">Value</label>
+                    <input type="text" id="kanban-modal-input" autocomplete="off" />
+                </div>
+                
+                <div class="form-group form-group-extended" id="kanban-modal-secondary-group" style="display: none;">
+                    <label id="kanban-modal-secondary-label" for="kanban-modal-secondary-input">Secondary</label>
+                    <input type="text" id="kanban-modal-secondary-input" autocomplete="off" />
+                </div>
+
+                <div class="form-group form-group-extended" id="kanban-modal-attachments-group" style="display: none;">
+                    <div class="modal-label-row">
+                        <label id="kanban-modal-attachments-label">Attachments</label>
+                        <button type="button" class="btn-secondary btn-small" id="btn-kanban-attach">+ Add File(s)</button>
+                        <input type="file" id="kanban-attachment-input" multiple style="display: none;" />
+                    </div>
+                    <ul id="kanban-attachment-list" class="kanban-attachment-list"></ul>
+                </div>
+
+                <div class="form-group form-group-extended" id="kanban-modal-color-group" style="display: none;">
+                    <div class="modal-label-row">
+                        <label id="kanban-modal-color-label">Color</label>
+                        
+                        <div class="color-picker-header-controls">
+                            <button type="button" class="btn-secondary btn-small" id="btn-kanban-bg-image">+ Image</button>
+                            <input type="file" id="kanban-bg-image-input" accept="image/png, image/jpeg, image/webp" style="display: none;" />
+                            
+                            <div class="color-target-toggle" id="color-target-toggle">
+                                <label><input type="radio" name="colorTarget" value="bg" checked> Background</label>
+                                <label><input type="radio" name="colorTarget" value="text"> Text</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="kanban-bg-image-preview-wrapper" class="modal-preview-wrapper" style="display: none;">
+                        <span class="modal-section-eyebrow">Active Image</span>
+                        <div class="modal-preview-actions">
+                            <span id="kanban-bg-image-name" class="modal-preview-filename"></span>
+                            <button type="button" class="btn-danger btn-tiny" id="btn-kanban-remove-bg-image">✖</button>
+                        </div>
+                    </div>
+
+                    <div id="kanban-recent-color-wrapper" class="modal-preview-wrapper" style="display: none;">
+                        <span class="modal-section-eyebrow">Last Used Combination</span>
+                        <div id="kanban-recent-color-swatch" class="color-swatch" data-tooltip="Apply Last Used Combo">Aa</div>
+                    </div>
+
+                    <div id="kanban-color-swatches" class="color-swatches-container" style="display: none;"></div>
+                    
+                    <div id="custom-color-picker" class="custom-color-picker-ui" style="display: none;">
+                        <div class="picker-top-row">
+                            <canvas id="color-wheel-canvas" width="160" height="160"></canvas>
+                            
+                            <div class="rgb-sliders-container">
+                                <div class="slider-group">
+                                    <label for="slider-r">R</label>
+                                    <input type="range" id="slider-r" min="0" max="255" value="0">
+                                    <span id="val-r" class="slider-val">0</span>
+                                </div>
+                                <div class="slider-group">
+                                    <label for="slider-g">G</label>
+                                    <input type="range" id="slider-g" min="0" max="255" value="121">
+                                    <span id="val-g" class="slider-val">121</span>
+                                </div>
+                                <div class="slider-group">
+                                    <label for="slider-b">B</label>
+                                    <input type="range" id="slider-b" min="0" max="255" value="191">
+                                    <span id="val-b" class="slider-val">191</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="picker-bottom-row">
+                            <div id="color-preview-box" class="color-preview-box">Aa</div>
+                            <input type="text" id="kanban-modal-color-input" autocomplete="off" maxlength="7" value="#" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary btn-cancel-modal">Cancel</button>
+                <button class="btn-primary btn-confirm-modal">Save</button>
+            </div>
+        </dialog>
+
+    </main>
+</body>
+</html>

@@ -1,0 +1,191 @@
+<div class="compressor-container">
+    <div class="split-pane-layout">
+        
+        <section class="compressor-sidebar">
+            <header class="sidebar-header-local">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <h2 style="margin: 0;">Project Files</h2>
+                    <svg id="btn-refresh-tree" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="cursor: pointer; transition: stroke 0.2s;" onmouseover="this.style.stroke='var(--text-color)'" onmouseout="this.style.stroke='var(--text-muted)'" title="Refresh Directory Tree">
+                        <polyline points="23 4 23 10 17 10"></polyline>
+                        <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+                    </svg>
+                </div>
+                <div class="header-actions">
+                    <button id="btn-toggle-cc-legend" class="btn-secondary btn-tiny" title="Toggle Geometric Syntax Legend" style="display: flex; align-items: center; gap: 6px; padding: 4px 10px;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="16" x2="12" y2="12"></line>
+                            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                        </svg>
+                        Syntax Legend
+                    </button>
+                </div>
+            </header>
+
+            <div class="compressor-controls">
+                <div class="control-group">
+                    <label for="highlight-folder-select">Highlight Sub-Directory</label>
+                    <select id="highlight-folder-select" class="cc-select">
+                        <option value="">None</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="explorer-search-bar">
+                <div class="tree-search-wrapper">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <input type="text" id="cc-tree-search-input" placeholder="Find file..." autocomplete="off">
+                    <button id="btn-cc-regex-toggle" class="regex-toggle-btn" title="Use Regular Expression" data-active="false">.*</button>
+                    <div id="cc-tree-search-dropdown" class="custom-autocomplete-dropdown" style="display: none;"></div>
+                </div>
+            </div>
+
+            <div id="workspace-file-tree" class="file-tree-container">
+                <div class="empty-state-container" style="padding: 40px 20px; text-align: center; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                    <svg class="empty-state-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 16px;">
+                        <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+                    </svg>
+                    <h3 style="margin: 0 0 8px 0; color: var(--text-color); font-size: 16px;">No Directory Mapped</h3>
+                    <p class="empty-state-desc" style="margin: 0;">Navigate to the Workspace Hub to map your source code directory.</p>
+                </div>
+            </div>
+
+            <aside id="cc-legend-drawer" class="syntax-legend-drawer">
+                <div class="legend-header">
+                    <h3>Geometric Syntax</h3>
+                    <button id="btn-close-cc-legend" class="btn-icon btn-tiny" title="Close Legend">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+                <div class="legend-body">
+                    <h4 class="legend-section-title">NODE SHAPES</h4>
+                    <ul class="legend-list">
+                        <li><span class="shape-ref shape-rect" style="background-color: #38bdf8; border-color: #0284c7;"></span> <strong>Rectangles:</strong> Directories & Folders</li>
+                        <li><span class="shape-ref shape-pentagon" style="background-color: #14b8a6; border-color: #0f766e;"></span> <strong>Pentagons:</strong> Markdown Architecture (.md)</li>
+                        <li><span class="shape-ref shape-triangle" style="background-color: #ef4444; border-color: #b91c1c;"></span> <strong>Triangles:</strong> External Documents (.pdf, .docx)</li>
+                        <li><span class="shape-ref shape-diamond" style="background-color: #facc15; border-color: #ca8a04;"></span> <strong>Diamonds:</strong> Logic & Controllers (.js, .py, .sh)</li>
+                        <li><span class="shape-ref shape-circle" style="background-color: #f59e0b; border-color: #b45309;"></span> <strong>Circles:</strong> Database & Data (.sql, .db, .csv)</li>
+                        <li><span class="shape-ref shape-hex" style="background-color: #a855f7; border-color: #7e22ce;"></span> <strong>Hexagons:</strong> View & Presentation (.html, .jsx)</li>
+                        <li><span class="shape-ref shape-pill" style="background-color: #ec4899; border-color: #be185d;"></span> <strong>Pills:</strong> Styling (.css, .scss)</li>
+                        <li><span class="shape-ref shape-octagon" style="background-color: #10b981; border-color: #047857;"></span> <strong>Octagons:</strong> Config & Infrastructure (.json, .env)</li>
+                        <li><span class="shape-ref shape-generic" style="background-color: #94a3b8; border-color: #475569;"></span> <strong>Squares:</strong> Generic / Unknown Files</li>
+                    </ul>
+                </div>
+            </aside>
+        </section>
+
+        <div id="compressor-pane-resizer" class="vertical-drag-handle" title="Drag to resize sidebar"></div>
+
+        <section class="compressor-stage">
+            <header class="stage-header-local">
+                <h2>Context Payload Staging</h2>
+                <div class="header-actions">
+                    <button id="btn-clear-stage" class="btn-danger btn-tiny">Clear Stage</button>
+                    <button id="btn-copy-instructions" class="btn-secondary btn-tiny">Copy Constraints</button>
+                    <button id="btn-copy-payload" class="btn-primary btn-tiny" disabled>Copy Payload</button>
+                </div>
+            </header>
+
+            <div class="payload-hud">
+                <div class="hud-metric">
+                    <span class="hud-label">Staged Files</span>
+                    <span class="hud-value" id="staged-file-count">0</span>
+                </div>
+                
+                <div class="hud-metric token-meter-wrapper">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 6px;">
+                        <div style="display: flex; flex-direction: column;">
+                            <span class="hud-label" style="font-size: 10px; font-weight: 800; letter-spacing: 0.5px;">SESSION TC:</span>
+                            <div style="display: flex; align-items: baseline; gap: 4px;">
+                                <span class="hud-value" id="total-token-count" style="font-size: 24px; line-height: 1;">0</span>
+                                <span style="font-size: 12px; color: var(--text-muted); font-weight: 600;" id="max-token-display">/ 128k</span>
+                            </div>
+                        </div>
+                        <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px;">
+                            <div style="display: flex; align-items: center; gap: 6px;">
+                                <select id="llm-context-select" class="cc-select" style="padding: 2px 20px 2px 6px; font-size: 11px; height: 22px; color: var(--accent-color); border-color: var(--border-color);">
+                                    <option value="8000">8k</option>
+                                    <option value="32000">32k</option>
+                                    <option value="128000" selected>128k</option>
+                                    <option value="2000000">2M</option>
+                                </select>
+                                <button id="btn-reset-session" class="btn-icon btn-tiny" title="Reset Session Counter" style="padding: 2px;">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.59-9.21L21.5 8"></path></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="vu-meter" id="vu-meter">
+                    </div>
+                    
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-top: 8px;">
+                        <div class="savings-metrics-group">
+                            <div class="savings-metric">
+                                <span class="savings-label">PAYLOAD<br>SAVINGS</span>
+                                <span id="payload-savings-count" class="savings-value highlight-green">+0</span>
+                            </div>
+                            <div class="savings-metric">
+                                <span class="savings-label">SESSION<br>SAVINGS</span>
+                                <span id="session-savings-count" class="savings-value highlight-green">+0</span>
+                            </div>
+                        </div>
+                        <span id="token-percentage-label" class="token-percentage-label">0.0% Capacity</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="llm-macros-panel" style="display: flex; gap: 10px; align-items: center; padding: 12px 20px; background-color: var(--surface-color); border-bottom: 1px solid var(--border-color);">
+                <span style="font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">LLM Macros:</span>
+                <button id="btn-macro-codebase" class="btn-secondary btn-tiny" style="display: flex; align-items: center; gap: 6px;" title="Generate Codebase.xml Prompt">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--accent-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                    Codebase Manifest
+                </button>
+                <button id="btn-macro-schema" class="btn-secondary btn-tiny" style="display: flex; align-items: center; gap: 6px;" title="Generate Schema Metadata Prompt">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--accent-color)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+                    Schema Metadata
+                </button>
+            </div>
+
+            <div class="staged-files-area">
+                <div class="staged-file-chips" id="staged-files-container">
+                    <div class="empty-stage-hint">
+                        <span>Click files in the sidebar to stage them for the LLM payload.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="compression-rules">
+                <div class="rule-group">
+                    <input type="checkbox" id="rule-strip-whitespace" class="rule-checkbox" checked>
+                    <label for="rule-strip-whitespace" class="rule-label">Aggressive Whitespace Pruning</label>
+                </div>
+                <div class="rule-group">
+                    <input type="checkbox" id="rule-remove-comments" class="rule-checkbox" checked>
+                    <label for="rule-remove-comments" class="rule-label">Scrub Comments</label>
+                </div>
+                <div class="rule-group">
+                    <input type="checkbox" id="rule-minify-json" class="rule-checkbox" checked>
+                    <label for="rule-minify-json" class="rule-label">JSON Minification</label>
+                </div>
+                <div class="rule-group">
+                    <input type="checkbox" id="rule-xml-tags" class="rule-checkbox" checked>
+                    <label for="rule-xml-tags" class="rule-label">Format via XML &lt;tags&gt;</label>
+                </div>
+            </div>
+
+            <div id="editor-horizontal-resizer" class="horizontal-drag-handle" title="Drag to resize editor"></div>
+
+            <div class="payload-preview-container">
+                <textarea id="payload-preview-area" class="payload-textarea" placeholder="Staged payload will compile here..." readonly></textarea>
+            </div>
+        </section>
+
+    </div>
+</div>

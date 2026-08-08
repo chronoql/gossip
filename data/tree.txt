@@ -1,0 +1,86 @@
+.
+├── .env
+├── data
+│   ├── codebase.xml
+│   ├── rm-gossip-db.sh
+│   ├── sakila-schema.sql
+│   ├── tree-command.sh
+│   └── tree.txt
+├── lib
+│   └── d3.min.js
+├── notarize.cjs
+├── package-lock.json
+├── package.json
+├── scripts
+│   └── notarize.js
+└── src
+    ├── database
+    │   ├── architecture-db-manager.js
+    │   ├── db-connection.js
+    │   ├── kanban-db-manager.js
+    │   └── master-schema-init.sql
+    ├── main
+    │   ├── domain-orchestrator.js
+    │   ├── ipc-controllers
+    │   │   ├── architecture-controller.js
+    │   │   ├── context-compressor-controller.js
+    │   │   ├── data-management-controller.js
+    │   │   ├── documentation-controller.js
+    │   │   ├── environment-controller.js
+    │   │   ├── kanban-controller.js
+    │   │   ├── payload-integrator-controller.js
+    │   │   ├── system-controller.js
+    │   │   ├── visualizer-controller.js
+    │   │   └── workspace-controller.js
+    │   ├── main.js
+    │   └── preload.js
+    ├── python
+    ├── renderer
+    │   ├── about.html
+    │   ├── architecture.html
+    │   ├── codebase-explorer.html
+    │   ├── context-compressor.html
+    │   ├── css
+    │   │   ├── about.css
+    │   │   ├── architecture.css
+    │   │   ├── codebase-explorer.css
+    │   │   ├── context-compressor.css
+    │   │   ├── data-management.css
+    │   │   ├── document-management.css
+    │   │   ├── documentation.css
+    │   │   ├── environment-settings.css
+    │   │   ├── index.css
+    │   │   ├── kanban.css
+    │   │   ├── license.css
+    │   │   ├── payload-integrator.css
+    │   │   ├── schema-visualizer.css
+    │   │   ├── variables.css
+    │   │   └── workspace-admin.css
+    │   ├── data-management.html
+    │   ├── document-management.html
+    │   ├── documentation.html
+    │   ├── environment-settings.html
+    │   ├── index.html
+    │   ├── js
+    │   │   ├── about-renderer.js
+    │   │   ├── architecture-renderer.js
+    │   │   ├── codebase-explorer-renderer.js
+    │   │   ├── context-compressor-renderer.js
+    │   │   ├── data-management-renderer.js
+    │   │   ├── documentation.js
+    │   │   ├── kanban-renderer.js
+    │   │   ├── license-renderer.js
+    │   │   ├── payload-integrator-renderer.js
+    │   │   ├── renderer.js
+    │   │   ├── schema-visualizer-renderer.js
+    │   │   ├── TEST-payload-renderer.js
+    │   │   └── workspace-admin-renderer.js
+    │   ├── kanban.html
+    │   ├── license.html
+    │   ├── payload-integrator.html
+    │   ├── schema-visualizer.html
+    │   ├── TEST-payload-integrator.html
+    │   └── workspace-admin.html
+    └── templates
+
+13 directories, 71 files

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline';">
+    <title>Payload Integrator - Chronoql Gossip</title>
+    
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/payload-integrator.css">
+</head>
+<body>
+    <div class="integrator-container">
+        
+        <main class="integrator-stage">
+            <div class="stage-content">
+                
+                <div class="integrator-modules-layout">
+                    
+                    <section class="integrator-module module-ingest">
+                        <div class="panel-header">
+                            <h3>1. Ingest JSON Payload</h3>
+                            <div class="header-actions">
+                                <button class="btn-icon-small" id="btn-toggle-errors" title="Toggle Console Log">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+                                </button>
+                                <button class="btn-icon-small" id="btn-clear-payload" title="Clear payload">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="editor-container">
+                            <textarea id="json-input-area" class="code-editor-textarea" spellcheck="false" placeholder="Paste the valid JSON object returned by the LLM here...&#10;&#10;{&#10;  &quot;src/main/main.js&quot;: &quot;...code...&quot;&#10;}"></textarea>
+                            
+                            <div id="error-drawer" class="error-drawer">
+                                <div id="error-resizer" class="horizontal-resizer" title="Drag to resize console"></div>
+                                <div class="error-drawer-header">
+                                    <h4 id="error-drawer-title">Validation Console</h4>
+                                    <button class="btn-icon-small" id="btn-close-errors" title="Dismiss Console">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                    </button>
+                                </div>
+                                <div class="error-drawer-content">
+                                    <div id="error-empty-msg" class="empty-drawer-msg">No validation errors or warnings to display.</div>
+                                    <ul id="error-list" class="error-list" style="display: none;"></ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="ingestion-footer">
+                            <div class="ingestion-actions">
+                                <button class="btn-secondary" id="btn-parse-payload">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                                    Validate & Parse
+                                </button>
+                                <span id="parse-status-message" class="status-message">Waiting for payload...</span>
+                            </div>
+                            <div class="target-badge">
+                                <span class="indicator-dot"></span>
+                                Root Target Active
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="integrator-module module-execute">
+                        <div class="panel-header">
+                            <h3>2. Pre-Flight Review</h3>
+                            <div class="header-actions">
+                                <button class="btn-icon-small" id="btn-toggle-preview" title="Toggle File Preview">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="editor-container">
+                            <div class="preflight-container">
+                                <div id="integrator-empty-state" class="empty-stage-hint">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg>
+                                    <span>Parsed files will appear here for review.</span>
+                                </div>
+                                
+                                <ul id="parsed-files-list" class="parsed-file-list" style="display: none;"></ul>
+                            </div>
+                            
+                            <div id="preview-drawer" class="preview-drawer">
+                                <div id="preview-resizer" class="horizontal-resizer" title="Drag to resize preview"></div>
+                                <div class="preview-drawer-header">
+                                    <h4 id="preview-drawer-title" class="truncate-text">File Preview</h4>
+                                    <button class="btn-icon-small" id="btn-close-preview" title="Close Preview">
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                    </button>
+                                </div>
+                                <div class="preview-drawer-content">
+                                    <div id="preview-empty-msg" class="empty-drawer-msg">Select a file from the list to preview its contents.</div>
+                                    <textarea id="preview-code-block" class="code-editor-textarea" readonly spellcheck="false" style="display: none;"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="execution-footer">
+                            <div class="warning-banner">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                                <span>Executing this payload will directly overwrite local files. Ensure your data management snapshots are up to date.</span>
+                            </div>
+                            <button class="btn-primary btn-execute" id="btn-execute-integration" disabled>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                                Integrate to Codebase
+                            </button>
+                        </div>
+
+                    </section>
+
+                </div>
+            </div>
+        </main>
+
+    </div>
+</body>
+</html>

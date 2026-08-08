@@ -1,0 +1,203 @@
+/**
+ * Chronoql Gossip: Data Management Styling
+ * Pure CSS presentation layer utilizing native variables.
+ * Frameworks: None.
+ */
+
+.data-management-view {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    overflow-y: auto;
+}
+
+.data-header {
+    padding: 24px 30px;
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--surface-color);
+    flex-shrink: 0;
+}
+
+.data-header-actions {
+    display: flex;
+    gap: 12px;
+}
+
+/* ==========================================
+   DASHBOARD GRID ARCHITECTURE
+   ========================================== */
+
+.data-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 24px;
+    padding: 30px;
+    align-items: flex-start;
+}
+
+.data-card {
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+/* ARCHITECTURAL FIX: Grid override to span the entire horizontal space */
+.card-span-full {
+    grid-column: 1 / -1;
+}
+
+.data-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    border-color: var(--accent-color);
+}
+
+.data-card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+}
+
+.data-icon {
+    color: var(--accent-color);
+    flex-shrink: 0;
+}
+
+.data-card-header h3 {
+    margin: 0;
+    font-size: 1.15rem;
+    font-weight: 600;
+}
+
+.data-desc {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+/* ==========================================
+   DANGER ZONE SPECIFICS
+   ========================================== */
+
+.card-danger {
+    border-color: rgba(239, 68, 68, 0.3);
+}
+
+.card-danger:hover {
+    border-color: rgba(239, 68, 68, 0.6);
+    box-shadow: 0 8px 24px rgba(239, 68, 68, 0.1);
+}
+
+.card-danger .data-icon {
+    color: var(--danger-color);
+}
+
+/* ==========================================
+   LISTS & UTILITIES
+   ========================================== */
+
+.data-empty-state {
+    padding: 20px;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    background-color: var(--bg-color);
+    border: 1px dashed var(--border-color);
+    border-radius: 8px;
+}
+
+.data-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.data-list::-webkit-scrollbar { width: 6px; }
+.data-list::-webkit-scrollbar-track { background: transparent; }
+.data-list::-webkit-scrollbar-thumb { background-color: rgba(0,0,0,0.1); border-radius: 10px; }
+.data-list::-webkit-scrollbar-thumb:hover { background-color: rgba(0,0,0,0.2); }
+
+.data-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 0.85rem;
+    transition: background-color 0.2s ease;
+    gap: 12px;
+}
+
+.data-list-item:hover {
+    background-color: rgba(56, 189, 248, 0.05);
+}
+
+.data-list-item-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+    min-width: 0; 
+}
+
+.data-list-item-title {
+    font-weight: 600;
+    color: var(--text-color);
+    font-family: monospace;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+}
+
+.data-list-item-date {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.data-list-actions {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0; 
+}
+
+.export-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.btn-full-width {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 16px;
+}
+
+.btn-small-action {
+    padding: 6px 10px;
+    font-size: 0.75rem;
+    border-radius: 4px;
+}

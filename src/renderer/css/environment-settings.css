@@ -1,0 +1,277 @@
+/**
+ * Chronoql Gossip: Environment Settings Styling
+ * Orchestrates the variable management dashboard, token-input chips, and typeahead UI.
+ * Pure CSS. Frameworks: None.
+ */
+
+/* ==========================================
+   MACRO LAYOUT
+   ========================================== */
+
+.env-settings-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    overflow-y: auto;
+}
+
+.env-settings-container::-webkit-scrollbar { width: 8px; }
+.env-settings-container::-webkit-scrollbar-track { background: transparent; }
+.env-settings-container::-webkit-scrollbar-thumb { background-color: rgba(0,0,0,0.15); border-radius: 10px; }
+
+/* ==========================================
+   HEADER ARCHITECTURE
+   ========================================== */
+
+.env-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 32px 40px;
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--surface-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.env-header-content h1 {
+    margin: 0;
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.env-subtitle {
+    margin: 8px 0 0 0;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.env-header-actions {
+    display: flex;
+    gap: 12px;
+}
+
+/* ==========================================
+   DASHBOARD & SECTIONS
+   ========================================== */
+
+.env-dashboard {
+    padding: 40px;
+    max-width: 900px;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+}
+
+.env-section {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.env-section-header h2 {
+    margin: 0 0 8px 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--accent-color);
+}
+
+.env-section-header p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* ==========================================
+   FORM CONTROLS & GRIDS
+   ========================================== */
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-grid-2-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.form-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-color);
+}
+
+.var-key-hint {
+    font-family: monospace;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    background-color: rgba(0,0,0,0.05);
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px dashed var(--border-color);
+}
+
+.standard-input {
+    width: 100%;
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.standard-input:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.1);
+}
+
+/* ==========================================
+   TOKEN INPUT (CHIPS) ARCHITECTURE
+   ========================================== */
+
+.token-input-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.token-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    padding: 10px 12px;
+    border-radius: 8px;
+    min-height: 50px;
+    align-items: center;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    cursor: text;
+}
+
+.token-list:focus-within {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.1);
+}
+
+.token-chip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background-color: rgba(56, 189, 248, 0.1);
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    color: var(--accent-color);
+    padding: 4px 10px;
+    border-radius: 16px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.btn-remove-token {
+    background: transparent;
+    border: none;
+    padding: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-color);
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    opacity: 0.7;
+}
+
+.btn-remove-token:hover {
+    background-color: rgba(56, 189, 248, 0.2);
+    opacity: 1;
+}
+
+.token-input-field {
+    flex: 1;
+    min-width: 150px;
+    background: transparent;
+    border: none;
+    color: var(--text-color);
+    font-size: 0.95rem;
+    padding: 4px;
+    outline: none;
+}
+
+/* ==========================================
+   TYPEAHEAD DROPDOWN
+   ========================================== */
+
+.typeahead-dropdown-container {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 4px;
+    z-index: 50;
+    display: none; /* Controlled via JS */
+}
+
+.typeahead-dropdown {
+    list-style: none;
+    margin: 0;
+    padding: 6px;
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.typeahead-item {
+    padding: 10px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: var(--text-color);
+    transition: background-color 0.2s ease;
+}
+
+.typeahead-item:hover,
+.typeahead-item.active {
+    background-color: rgba(56, 189, 248, 0.1);
+    color: var(--accent-color);
+}
+
+/* ==========================================
+   FILE PICKER COMPONENT
+   ========================================== */
+
+.file-picker-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.file-icon {
+    position: absolute;
+    left: 16px;
+    color: var(--text-muted);
+    pointer-events: none;
+}
+
+.file-input {
+    padding-left: 48px;
+    font-family: monospace;
+}

@@ -1,0 +1,522 @@
+/**
+ * Project: Chronoql Gossip
+ * Module: Schema Visualizer Styles
+ * Phase: 7 (Visualization Modules)
+ */
+
+/* ==========================================
+   MACRO LAYOUT & SPLIT PANE
+   ========================================= */
+.schema-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background-color: var(--bg-color);
+}
+
+.split-pane-layout {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.schema-stage-left {
+    width: var(--schema-left-width, 50%);
+    flex: none;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    background-color: var(--surface-color);
+}
+
+.schema-stage-right {
+    flex: 1; 
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+/* ==========================================
+   RESIZER HANDLES
+   ========================================= */
+.vertical-drag-handle {
+    width: 6px;
+    background-color: var(--border-color);
+    cursor: col-resize;
+    z-index: 10;
+    transition: background-color 0.2s;
+    flex-shrink: 0;
+}
+.vertical-drag-handle:hover, .vertical-drag-handle.is-resizing {
+    background-color: var(--accent-color);
+}
+
+.horizontal-drag-handle {
+    height: 6px;
+    background-color: var(--border-color);
+    cursor: row-resize;
+    z-index: 10;
+    transition: background-color 0.2s;
+    flex-shrink: 0;
+}
+.horizontal-drag-handle:hover, .horizontal-drag-handle.is-resizing {
+    background-color: var(--accent-color);
+}
+
+/* ==========================================
+   LOCAL HEADERS & SEARCH ARCHITECTURE
+   ========================================= */
+.stage-header-local {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    background-color: var(--surface-color);
+    border-bottom: 1px solid var(--border-color);
+    z-index: 10;
+}
+
+.stage-header-local h2 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-color);
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* --- Search Engine Rules --- */
+.explorer-search-bar {
+    padding: 10px 20px;
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--bg-color);
+    flex-shrink: 0;
+}
+
+.tree-search-wrapper {
+    display: flex;
+    align-items: center;
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 6px 12px;
+    gap: 8px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tree-search-wrapper:focus-within {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
+}
+
+.tree-search-wrapper svg {
+    color: var(--text-muted);
+}
+
+.tree-search-wrapper input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--text-color);
+    outline: none;
+    font-size: 13px;
+    min-width: 0;
+}
+
+.tree-search-wrapper input::placeholder {
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+.regex-toggle-btn {
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: var(--text-muted);
+    font-family: monospace;
+    font-weight: 700;
+    font-size: 12px;
+    cursor: pointer;
+    padding: 2px 6px;
+    transition: all 0.2s ease;
+}
+
+.regex-toggle-btn:hover {
+    color: var(--text-color);
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.regex-toggle-btn[data-active="true"] {
+    background-color: rgba(56, 189, 248, 0.1);
+    color: var(--accent-color);
+    border-color: rgba(56, 189, 248, 0.3);
+}
+
+.custom-autocomplete-dropdown {
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 0;
+    width: 100%;
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.dropdown-item, .dropdown-empty {
+    padding: 10px 14px;
+    font-size: 13px;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    border-left: 2px solid transparent;
+}
+
+.dropdown-empty {
+    color: var(--text-muted);
+    font-style: italic;
+    cursor: default;
+}
+
+.dropdown-item:hover, .dropdown-item.focused {
+    background-color: rgba(56, 189, 248, 0.05);
+    border-left-color: var(--accent-color);
+}
+
+.dropdown-item strong {
+    color: var(--accent-color);
+    font-weight: 700;
+}
+
+/* ==========================================
+   D3 MOUNT SURFACE
+   ========================================= */
+.schema-surface {
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    background-color: var(--bg-color);
+    cursor: grab;
+    background-image: radial-gradient(var(--border-color) 1px, transparent 1px);
+    background-size: 24px 24px;
+}
+
+.schema-surface:active {
+    cursor: grabbing;
+}
+
+/* ==========================================
+   SYNTAX LEGEND DRAWER (SLIDE-OUT)
+   ========================================= */
+.syntax-legend-drawer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--surface-color);
+    border-left: 1px solid var(--border-color);
+    box-shadow: -4px 0 15px rgba(0, 0, 0, 0.1);
+    transform: translateX(100%);
+    opacity: 0; 
+    pointer-events: none; 
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+}
+
+.syntax-legend-drawer.open {
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.legend-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--bg-color);
+}
+
+.legend-header h3 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.legend-body {
+    padding: 20px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.legend-section-title {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    margin: 0 0 12px 0;
+}
+
+.legend-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.legend-list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--text-color);
+}
+
+.legend-divider {
+    border: none;
+    border-top: 1px solid var(--border-color);
+    margin: 20px 0;
+}
+
+.shape-ref {
+    display: inline-block;
+}
+
+.shape-circle {
+    width: 16px;
+    height: 16px;
+    background-color: #f59e0b;
+    border: 2px solid #b45309;
+    border-radius: 50%;
+}
+
+.shape-circle.child-node {
+    background-color: var(--bg-color);
+    border: 2px solid #f59e0b;
+}
+
+/* ==========================================
+   RIGHT STAGE: DATA DICTIONARY PANELS
+   ========================================= */
+.inspector-panel {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-color);
+}
+
+.schema-panel-top {
+    height: var(--schema-top-height, 50%);
+    flex: none;
+}
+
+.schema-panel-bottom {
+    flex: 1; 
+    height: auto;
+    background-color: var(--surface-color);
+}
+
+.panel-header {
+    padding: 12px 20px;
+    background-color: var(--surface-color);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-title-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.panel-header h2 {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-color);
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.header-subtitle {
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+.selected-node-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 12px;
+    background-color: var(--border-color);
+    color: var(--text-color);
+    font-size: 11px;
+    font-weight: 500;
+    font-family: monospace;
+}
+
+.table-badge.active-badge {
+    background-color: rgba(245, 158, 11, 0.15);
+    color: #f59e0b;
+    border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.schema-dictionary {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.meta-group h4 {
+    margin: 0 0 12px 0;
+    font-size: 12px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 6px;
+}
+
+.schema-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.empty-state-text {
+    color: var(--text-muted);
+    font-style: italic;
+    font-size: 13px;
+    margin: 0;
+}
+
+.dict-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-family: monospace;
+    font-size: 12px;
+}
+
+.dict-item-name {
+    color: var(--accent-color);
+    font-weight: 600;
+}
+
+.dict-item-type {
+    color: var(--text-muted);
+}
+
+.dict-fk-target {
+    color: #10b981;
+}
+
+/* ==========================================
+   DDL VIEWER (RAW SQL) HIGH-CONTRAST
+   ========================================= */
+.ddl-viewer-container {
+    flex: 1;
+    overflow: auto;
+    padding: 16px;
+    background-color: #000000; 
+    margin: 0;
+}
+
+.sql-code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 14px; 
+    line-height: 1.6;
+    color: #ffffff; 
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
+.empty-state-code {
+    color: #94a3b8;
+    font-style: italic;
+}
+
+/* Syntax Highlighting Primitives */
+.sql-keyword { color: #ff79c6; font-weight: bold; } 
+.sql-type { color: #8be9fd; } 
+.sql-string { color: #f1fa8c; } 
+.sql-comment { color: #6272a4; font-style: italic; } 
+
+/* ==========================================
+   D3.js SVG INJECTIONS
+   ========================================= */
+.node circle {
+    fill: var(--surface-color);
+    stroke: var(--text-muted);
+    stroke-width: 2px;
+    transition: all 0.3s ease;
+}
+
+.node.root-node circle {
+    fill: #f59e0b;
+    stroke: #b45309;
+}
+
+.node text {
+    font-family: monospace;
+    font-size: 12px;
+    fill: var(--text-color);
+    text-shadow: 0 1px 3px var(--bg-color), 0 -1px 3px var(--bg-color);
+}
+
+.link {
+    fill: none;
+    stroke: var(--border-color);
+    stroke-width: 1.5px;
+    transition: stroke 0.3s ease, stroke-width 0.3s ease;
+}
+
+.node.active-lineage circle {
+    stroke: var(--accent-color);
+    stroke-width: 3px;
+    filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.4));
+}
+
+.node.dimmed circle,
+.node.dimmed text {
+    opacity: 0.25;
+}
+
+.link.active-lineage {
+    stroke: var(--accent-color);
+    stroke-width: 2.5px;
+}
+
+.link.dimmed {
+    stroke-opacity: 0.15;
+}

@@ -1,0 +1,33 @@
+#####################################################
+#     Ignore the following files and directories    #
+#####################################################
+
+# Ignore the the directories for creating a new build
+build/
+release/
+
+# Ignore the MySQL sample database
+data/sakila-schemma.sql
+
+# Ignore the script I use to wipe the SQLite database
+data/rm-gossip-db.sh
+
+# Ignore Mac OS system files
+.DS_Store
+
+# Ignore node_modules directory because it should
+# be rebuilt
+node_modules/
+
+# Apple Notarization Ticket
+notarize.cjs
+
+# package.json lock file
+package-lock.json
+
+
+docs/
+scripts/
+
+.env
+.chronoql_backups

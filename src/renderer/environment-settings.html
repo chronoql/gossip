@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline';">
+    <title>Environment Settings - Chronoql Gossip</title>
+    
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/environment-settings.css">
+</head>
+<body>
+    <div class="env-settings-container">
+        
+        <header class="env-header">
+            <div class="env-header-content">
+                <h1>Environment Settings</h1>
+                <p class="env-subtitle">Manage global project variables and architecture constraints for the active workspace.</p>
+            </div>
+            <div class="env-header-actions">
+                <button class="btn-secondary" id="btn-cancel-settings">Cancel</button>
+                <button class="btn-primary" id="btn-save-settings">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                    Save Changes
+                </button>
+            </div>
+        </header>
+
+        <main class="env-dashboard">
+            <section class="env-section">
+                <div class="env-section-header">
+                    <h2>Architecture Stack</h2>
+                    <p>Define the core frameworks, libraries, and database technologies utilized in this workspace.</p>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">
+                        Components <span class="var-key-hint">{{ARCHITECTURE_COMPONENTS}}</span>
+                    </label>
+                    <div class="token-input-wrapper" id="token-wrapper-architecture">
+                        <div class="token-list" id="token-list-architecture">
+                            <div class="token-chip">
+                                <span>Electron</span>
+                                <button type="button" class="btn-remove-token" tabindex="-1">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                </button>
+                            </div>
+                            <div class="token-chip">
+                                <span>Node.js</span>
+                                <button type="button" class="btn-remove-token" tabindex="-1">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                </button>
+                            </div>
+                            <div class="token-chip">
+                                <span>better-sqlite3</span>
+                                <button type="button" class="btn-remove-token" tabindex="-1">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                </button>
+                            </div>
+                            <div class="token-chip">
+                                <span>D3.js</span>
+                                <button type="button" class="btn-remove-token" tabindex="-1">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                                </button>
+                            </div>
+                            <input type="text" class="token-input-field" placeholder="Type to add a component...">
+                        </div>
+                        
+                        <div class="typeahead-dropdown-container">
+                            <ul class="typeahead-dropdown" id="typeahead-architecture">
+                                </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="env-section">
+                <div class="env-section-header">
+                    <h2>Sprint & Iteration Metadata</h2>
+                    <p>Track the active development cycle for context compression and automated Roadmap mapping.</p>
+                </div>
+                
+                <div class="form-grid-2-col">
+                    <div class="form-group">
+                        <label class="form-label">
+                            Current Phase <span class="var-key-hint">{{CURRENT_PHASE}}</span>
+                        </label>
+                        <input type="text" class="standard-input" value="Phase 3" placeholder="e.g., Phase 1">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">
+                            Target Output <span class="var-key-hint">{{NEXT_PHASE_GOAL}}</span>
+                        </label>
+                        <input type="text" class="standard-input" value="Context Compression & Architecture Setup" placeholder="e.g., Database Migration">
+                    </div>
+                </div>
+            </section>
+
+            <section class="env-section">
+                <div class="env-section-header">
+                    <h2>Data Intelligence Mapping</h2>
+                    <p>Link the primary structural artifacts utilized by the Schema Visualizer and Data Flow modules.</p>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">
+                        Master Schema File <span class="var-key-hint">{{SCHEMA_ENTRY_FILE}}</span>
+                    </label>
+                    <div class="file-picker-wrapper">
+                        <svg class="file-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                        <input type="text" class="standard-input file-input" value="master-schema-init.sql" placeholder="filename.sql">
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+</body>
+</html>

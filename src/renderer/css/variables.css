@@ -1,0 +1,40 @@
+:root {
+    /* Light Mode Fundamentals */
+    --bg-color: #f3f4f6;
+    --surface-color: #ffffff;
+    --text-color: #0f172a;
+    --text-muted: #64748b;
+    --border-color: #cbd5e1;
+    
+    /* Branding & Interactive */
+    --accent-color: #38bdf8;
+    --accent-hover: #0284c7;
+    --danger-color: #dc2626;
+    
+    /* Layout Variables */
+    --sidebar-width: 22%;
+    --border-radius: 8px;
+    --focus-ring-offset: 2px;
+    
+    /* Specific Panel Colors */
+    --off-white-border: #f8f9fa;
+    --sidebar-active-bg: #e0f2fe;
+}
+
+body.dark-mode {
+    /* Dark Mode Fundamentals */
+    --bg-color: #0f172a;
+    --surface-color: #1e293b;
+    --text-color: #f8fafc;
+    --text-muted: #94a3b8;
+    --border-color: #334155;
+    
+    /* Branding & Interactive */
+    --accent-color: #38bdf8;
+    --accent-hover: #7dd3fc;
+    --danger-color: #ef4444;
+    
+    /* Specific Panel Colors */
+    --off-white-border: #020617;
+    --sidebar-active-bg: #0f172a;
+}

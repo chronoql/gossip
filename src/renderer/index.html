@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline';">
+    <title>Chronoql Gossip</title>
+    
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/kanban.css">
+    <link rel="stylesheet" href="css/data-management.css">
+    <link rel="stylesheet" href="css/context-compressor.css">
+    <link rel="stylesheet" href="css/architecture.css">
+    <link rel="stylesheet" href="css/environment-settings.css">
+    <link rel="stylesheet" href="css/payload-integrator.css">
+    <link rel="stylesheet" href="css/codebase-explorer.css">
+    <link rel="stylesheet" href="css/schema-visualizer.css">
+    <link rel="stylesheet" href="css/workspace-admin.css">
+    
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+
+    <nav id="sidebar">
+        <div id="sidebar-padding-wrapper">
+            <div id="sidebar-top">
+                <div class="sidebar-brand">
+                    <svg viewBox="0 0 120 120" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="60" cy="60" r="50" fill="none" stroke="#38bdf8" stroke-width="8" stroke-dasharray="20 10"/>
+                        <circle cx="60" cy="60" r="30" fill="none" stroke="#a855f7" stroke-width="6"/>
+                        <circle cx="60" cy="60" r="10" fill="#22c55e" />
+                    </svg>
+                    <h2>chronoql gossip</h2>
+                </div>
+
+                <div class="global-search-trigger-wrapper">
+                    <button id="btn-trigger-palette" class="global-search-trigger global-search-trigger-btn">
+                        <div class="trigger-left">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                            <span>Jump to document...</span>
+                        </div>
+                        <div class="trigger-right">
+                            <kbd class="kbd-hint">⌘</kbd><kbd class="kbd-hint">P</kbd>
+                        </div>
+                    </button>
+                </div>
+
+                <div id="trees-wrapper">
+                    <div class="tree-container active" id="tree-master">
+                        <ul class="indented-tree">
+                            <li>
+                                <div class="node-major">
+                                    <svg class="nav-icon-major" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"></path><path d="M10 22h4"></path><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"></path></svg>
+                                    <span>Ideation & Planning</span>
+                                </div>
+                                <ul class="node-minor-list expanded">
+                                    <li class="node-minor" data-view="kanban-board">
+                                        <svg class="nav-icon-minor" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line></svg>
+                                        <span>Kanban Orchestration</span>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <div class="node-major">
+                                    <svg class="nav-icon-major" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                                    <span>Architecture & Constraints</span>
+                                </div>
+                                <ul class="node-minor-list expanded">
+                                    <li class="node-minor" data-view="architecture-workspace">
+                                        <svg class="nav-icon-minor" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+                                        <span>Architecture Workspace</span>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <div class="node-major">
+                                    <svg class="nav-icon-major" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                                    <span>System Visualizers</span>
+                                </div>
+                                <ul class="node-minor-list expanded">
+                                    <li class="node-minor" data-view="codebase-explorer">
+                                        <svg class="nav-icon-minor" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                                        <span>Codebase Explorer</span>
+                                    </li>
+                                    <li class="node-minor" data-view="schema-visualizer">
+                                        <svg class="nav-icon-minor" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                                        <span>Schema Visualizer</span>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <div class="node-major">
+                                    <svg class="nav-icon-major" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
+                                    <span>LLM Command Center</span>
+                                </div>
+                                <ul class="node-minor-list expanded">
+                                    <li class="node-minor" data-view="context-compressor">
+                                        <svg class="nav-icon-minor" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 14 10 14 10 20"></polyline><polyline points="20 10 14 10 14 4"></polyline><line x1="14" y1="10" x2="21" y2="3"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+                                        <span>Context Compressor</span>
+                                    </li>
+                                    <li class="node-minor active-node" data-view="payload-integrator">
+                                        <svg class="nav-icon-minor" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                                        <span>Payload Integrator</span>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <div class="node-major">
+                                    <svg class="nav-icon-major" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                                    <span>System Administration</span>
+                                </div>
+                                <ul class="node-minor-list expanded">
+                                    <li class="node-minor" data-view="workspace-admin">
+                                        <svg class="nav-icon-minor" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                                        <span>Workspace Hub</span>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="sidebar-bottom">
+                <button id="btn-quit-app" class="btn-icon-sidebar" title="Quit this Application">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                    <span>Exit</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div id="sidebar-resizer" class="resizer" title="Drag to resize sidebar"></div>
+
+    <main id="main-stage">
+        <div id="main-stage-content">
+            <div class="stage-header">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <button id="btn-toggle-sidebar" class="btn-icon hamburger-btn" title="Toggle Sidebar">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                    </button>
+                    <h1 id="macro-view-title">Command Center</h1>
+                    <div id="macro-header-icon" style="display: flex; align-items: center;"></div>
+                </div>
+                <div class="omni-container">
+                    <button id="btn-toggle-todos" class="btn-secondary" title="Shortcut: Cmd+T / Ctrl+T">
+                        Quick Tasks
+                    </button>
+                    <div class="omni-dropdown-wrapper">
+                        <button id="omni-add-btn" class="btn-primary">+ Add New</button>
+                        <div id="omni-dropdown-menu" class="omni-dropdown-menu">
+                            <button class="omni-menu-item" data-action="new-kanban-card">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line></svg>
+                                <span class="omni-item-label">New Kanban Card</span>
+                            </button>
+                            <button class="omni-menu-item" data-action="open-scratchpad" title="Shortcut: Cmd+Shift+S">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                                <span class="omni-item-label">Open Scratchpad</span>
+                                <span class="omni-shortcut">⌘⇧S</span>
+                            </button>
+                            <button class="omni-menu-item" data-action="new-architecture-doc">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+                                <span class="omni-item-label">New Architecture Doc</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="stage-with-sidebar">
+                <div id="dynamic-stage">
+                    <div class="empty-state-container">
+                        <svg class="empty-state-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                        <h3>Select a module from the sidebar.</h3>
+                        <p class="empty-state-desc">Your command center and orchestration tools will appear here.</p>
+                    </div>
+                </div>
+
+                <div id="todo-sidebar-panel" class="collapsed">
+                    <div class="todo-header">
+                        <h3 class="todo-title">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+                            My Quick Tasks
+                        </h3>
+                        <div class="todo-header-actions">
+                            <button class="btn-open-kanban" id="btn-open-kanban-board" title="Open Full Kanban Board">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line></svg>
+                            </button>
+                            <button class="btn-close-sidebar" id="btn-close-todos" title="Close Quick Tasks">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="todo-input-wrapper">
+                        <input type="text" id="todo-quick-input" class="todo-input" placeholder="What needs to get done?">
+                        <button id="todo-add-btn" class="todo-add-btn">Add a New Task</button>
+                    </div>
+                    <div class="todo-list-container" id="todo-list-container"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="global-scratchpad-panel" class="collapsed">
+            <div id="scratchpad-resizer" class="horizontal-resizer" title="Drag to resize scratchpad"></div>
+            <div class="scratchpad-header">
+                <div class="scratchpad-title-wrapper">
+                    <div class="scratchpad-title">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        Global Scratchpad
+                    </div>
+                    <button id="btn-toggle-md-guide" class="btn-icon btn-tiny" title="Shortcut: Cmd+/ or Ctrl+/">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                    </button>
+                </div>
+                
+                <div class="scratchpad-controls">
+                    <div class="segmented-control" id="scratchpad-view-toggle">
+                        <button class="segment-btn active" data-state="state-edit" title="Edit Only">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                        </button>
+                        <button class="segment-btn" data-state="state-split" title="Split View">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="12" y1="3" x2="12" y2="21"></line></svg>
+                        </button>
+                        <button class="segment-btn" data-state="state-view" title="Read Only">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="scratchpad-actions">
+                    <span id="scratchpad-status" class="scratchpad-status">Saved locally</span>
+                    <button id="btn-scratchpad-search" class="btn-icon" title="Search (Cmd/Ctrl+F)">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    </button>
+                    <button id="btn-copy-scratchpad" class="btn-icon btn-scratchpad-copy" title="Copy Buffer">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    </button>
+                    <button id="btn-clear-scratchpad" class="btn-icon" title="Clear Scratchpad">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2-2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                    </button>
+                    <button id="btn-close-scratchpad" class="btn-icon" title="Close Scratchpad">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                </div>
+            </div>
+            
+            <div id="scratchpad-search-bar" class="scratchpad-search-bar" style="display: none;">
+                <button id="btn-search-case" class="btn-icon" title="Match Case (Alt+C)">Aa</button>
+                <div class="search-input-wrapper">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="opacity: 0.5;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    <input type="text" id="scratchpad-search-input" placeholder="Find in scratchpad...">
+                    <span id="scratchpad-search-counter" class="search-counter">0/0</span>
+                </div>
+                <div class="search-actions">
+                    <button id="btn-search-prev" class="btn-icon btn-tiny" title="Previous (Shift+Enter)">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+                    </button>
+                    <button id="btn-search-next" class="btn-icon btn-tiny" title="Next (Enter)">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </button>
+                    <button id="btn-search-close" class="btn-icon btn-tiny" title="Close (Esc)">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="scratchpad-body state-edit" id="scratchpad-body-container">
+                <div class="scratchpad-pane scratchpad-editor-pane">
+                    <div id="scratchpad-backdrop" class="scratchpad-backdrop" aria-hidden="true"></div>
+                    <textarea id="scratchpad-textarea" class="scratchpad-textarea" placeholder="Stage your LLM outputs or architectural notes here. This buffer parses Markdown and persists securely across all application views..."></textarea>
+                </div>
+
+                <div class="scratchpad-divider" id="scratchpad-divider"></div>
+
+                <div class="scratchpad-pane scratchpad-viewer-pane">
+                    <div id="scratchpad-preview" class="scratchpad-preview markdown-body"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="panel-2-bottom">
+            <button class="menu-icon-btn" id="btn-data-management">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+                <span>Data Management</span>
+            </button>
+            <button class="menu-icon-btn" id="btn-about">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                <span>About</span>
+            </button>
+            <button class="menu-icon-btn" id="btn-documentation">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+                <span>Documentation</span>
+            </button>
+            
+            <div class="flex-spacer"></div>
+            
+            <div class="omni-container" id="more-menu-container">
+                <button class="menu-icon-btn" id="btn-more">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+                    <span>More</span>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <div id="omni-palette-overlay" class="omni-palette-overlay" style="display: none;">
+        <div class="omni-palette">
+            <div class="omni-palette-input-wrapper">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <input type="text" id="omni-palette-input" placeholder="Search architectural documents..." autocomplete="off">
+            </div>
+            <div id="omni-palette-results" class="omni-palette-results">
+                </div>
+            <div class="omni-palette-footer">
+                <span><kbd class="kbd-hint">↑</kbd> <kbd class="kbd-hint">↓</kbd> to navigate</span>
+                <span><kbd class="kbd-hint">↵</kbd> to select</span>
+                <span><kbd class="kbd-hint">esc</kbd> to close</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="markdown-drawer" class="markdown-drawer">
+        <div class="md-drawer-header">Basic Markdown</div>
+        <ul class="md-drawer-list">
+            <li><code>#</code> Heading 1</li>
+            <li><code>##</code> Heading 2</li>
+            <li><code>###</code> Heading 3</li>
+            <li><code>####</code> Heading 4</li>
+            <li><code>#####</code> Heading 5</li>
+            <li><code>######</code> Heading 6</li>
+            <li><code>**text**</code> Bold</li>
+            <li><code>*text*</code> Italic</li>
+            <li><code>`code`</code> Inline Code</li>
+            <li><code>```</code> Code Block</li>
+            <li><code>></code> Blockquote</li>
+            <li><code>>></code> Nested Quote</li>
+            <li><code>-</code> Bullet List</li>
+            <li><code>---</code> Horizontal Rule</li>
+            <li><code>[link](url)</code> Hyperlink</li>
+        </ul>
+        <div class="md-drawer-header border-top">Shortcuts</div>
+        <ul class="md-drawer-list shortcuts-list">
+            <li><code>⌘/Ctrl + ⇧ + S</code> Global Scratchpad</li>
+            <li><code>⌘/Ctrl + P</code> Command Palette</li>
+            <li><code>⌘/Ctrl + /</code> Toggle MD Guide</li>
+            <li><code>⌘/Ctrl + F</code> Find in Editor</li>
+        </ul>
+    </div>
+
+    <div id="system-mounts">
+        <div id="kanban-mount"></div>
+        <div id="data-management-mount"></div>
+    </div>
+
+    <script src="../../lib/d3.min.js"></script>
+    <script src="js/kanban-renderer.js"></script>
+    <script src="js/data-management-renderer.js"></script>
+    <script src="js/renderer.js"></script>
+</body>
+</html>

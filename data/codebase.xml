@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<codebase>
+    <project name="Chronoql Gossip" />
+    <description>Visual, offline-first tactical command center for AI-assisted software development, managing context compression, constraints, and architecture visualizations.</description>
+    <architecture>
+        <framework>Electron</framework>
+        <backend>Node.js</backend>
+        <database>SQLite3 (via better-sqlite3)</database>
+        <frontend>Native HTML5, CSS3, Vanilla JavaScript</frontend>
+        <libraries>D3.js (Visualization)</libraries>
+    </architecture>
+
+    <node-modules>
+        <module name="@electron/notarize" purpose="Interacts with Apple's Notary Service to securely upload and staple notarization tickets to macOS applications." />
+        <module name="adm-zip" purpose="Synchronous zip extraction utility used for restoring ecosystem backups and unpacking database archives directly over the active user data directory." />
+        <module name="archiver" purpose="Streaming interface for archive generation, used to bundle the SQLite database and physical attachment directories into a single ZIP file." />
+        <module name="better-sqlite3" purpose="Synchronous SQLite3 driver for robust, atomic local database transactions." />
+        <module name="d3" purpose="Data-driven document library for rendering complex orthogonal network and relationship graphs." />
+        <module name="docx" purpose="Used for generating and exporting Word documents from compiled specification and architecture markdowns." />
+        <module name="dotenv" purpose="Loads environment variables from the .env file into process.env for secure credential management." />
+        <module name="electron-store" purpose="Simple data persistence for saving user preferences and UI states (like window dimensions and active modules) across sessions." />
+        <module name="fast-xml-parser" purpose="High-performance XML parser used by the Codebase Explorer to ingest and traverse the codebase.xml manifest." />
+        <module name="pdfkit" purpose="Used for generating and exporting PDF documents from the Document Management System." />
+    </node-modules>
+
+    <structure>
+        <file name=".env" status="active">
+            <description>Local environment configuration file containing secure credentials.</description>
+            <visualizer-description>Stores sensitive environment variables like Apple Developer credentials, strictly ignored from version control.</visualizer-description>
+            <inputs>None</inputs>
+            <outputs>notarize.cjs</outputs>
+        </file>
+        <file name="notarize.cjs" status="active">
+            <description>CommonJS execution script for macOS app notarization.</description>
+            <visualizer-description>Hook script executed by electron-builder to authenticate and notarize the macOS binary via Apple's Notary API.</visualizer-description>
+            <inputs>.env</inputs>
+            <outputs>macOS Gatekeeper Notarization Ticket</outputs>
+        </file>
+        <file name="package.json" status="active">
+            <description>Node.js project manifest, build targets, and dependency tracker for the Gossip environment.</description>
+            <visualizer-description>Defines the core Node.js application identity, dependency map, and execution scripts required to boot the Electron and backend environment for Chronoql Gossip.</visualizer-description>
+            <inputs>None</inputs>
+            <outputs>package-lock.json, main.js</outputs>
+        </file>
+        <file name="package-lock.json" status="active">
+            <description>Exact dependency version locks.</description>
+            <visualizer-description>Cryptographic lockfile ensuring deterministic builds across environments by pinning exact dependency graph versions.</visualizer-description>
+            <inputs>package.json</inputs>
+            <outputs>Node Environment</outputs>
+        </file>
+
+        <directory name="data">
+            <description>Stores project utilities and architectural maps.</description>
+            <visualizer-description>The local storage volume for persistent architectural mappings, structural logs, and bash utilities utilized during macro OS synchronization.</visualizer-description>
+            <file name="codebase.xml" status="active">
+                <description>XML map of the project architecture and file statuses.</description>
+                <visualizer-description>The master architectural manifest. Acts as the definitive source of truth for file tracking, system modules, and metadata serving the interactive Codebase Explorer.</visualizer-description>
+                <inputs>tree.txt</inputs>
+                <outputs>Renderer UI</outputs>
+            </file>
+            <file name="rm-gossip-db.sh" status="active">
+                <description>Utility script for safely removing the local SQLite database during development cycles.</description>
+                <visualizer-description>A targeted destructive bash script designed to instantly wipe the local SQLite database to reset the application state during testing cycles.</visualizer-description>
+                <inputs>None</inputs>
+                <outputs>gossip.db (Deletion)</outputs>
+            </file>
+            <file name="sakila-schema.sql" status="active">
+                <description>A sample database schema file for testing and visualization.</description>
+                <visualizer-description>Alternate SQL dump used to test the schema visualizer's dialect-agnostic parsing engine.</visualizer-description>
+                <inputs>None</inputs>
+                <outputs>Schema Visualizer</outputs>
+            </file>
+            <file name="tree-command.sh" status="active">
+                <description>Utility script for generating directory trees.</description>
+                <visualizer-description>Bash utility utilizing the native tree command to generate a physical mapping of the project directory structure.</visualizer-description>
+                <inputs>Physical File System</inputs>
+                <outputs>tree.txt</outputs>
+            </file>
+            <file name="tree.txt" status="active">
+                <description>Text output of the current directory tree.</description>
+                <visualizer-description>The static, generated output from tree-command.sh, used for auditing the physical file system against the codebase.xml registry.</visualizer-description>
+                <inputs>tree-command.sh</inputs>
+                <outputs>codebase.xml (Audit Reference)</outputs>
+            </file>
+        </directory>
+
+        <directory name="lib">
+            <description>Stores local copies of third-party libraries.</description>
+            <visualizer-description>Offline cache for third-party libraries, ensuring the Command Center remains fully operational without an internet connection.</visualizer-description>
+            <file name="d3.min.js" status="active">
+                <description>Local dependency for Mind Map and architecture visualizations.</description>
+                <visualizer-description>The minified Data-Driven Documents library powering the highly interactive Schema Visualizer and Codebase Explorer modules.</visualizer-description>
+                <inputs>None</inputs>
+                <outputs>index.html, renderer.js</outputs>
+            </file>
+        </directory>
+
+        <directory name="scripts">
+            <description>Staging directory for auxiliary build scripts.</description>
+            <visualizer-description>Contains pipeline automation scripts, though some may be deprecated in favor of root-level CommonJS implementations.</visualizer-description>
+            <file name="notarize.js" status="inactive">
+                <description>Legacy ES module notarization script.</description>
+                <visualizer-description>Deprecated notarization script. Superceded by notarize.cjs to bypass CommonJS/ESM resolution conflicts in the build pipeline.</visualizer-description>
+                <inputs>None</inputs>
+                <outputs>None</outputs>
+            </file>
+        </directory>
+
+        <directory name="src">
+            <visualizer-description>The primary application source code tree, structurally segregated into database, main (Node/Electron), and renderer (UI) domains to enforce strict separation of concerns.</visualizer-description>
+            
+            <directory name="database">
+                <visualizer-description>Houses all SQLite DDL initializations, PRAGMA constraint definitions, and backend data-access managers (CRUD orchestrators).</visualizer-description>
+                <file name="architecture-db-manager.js" status="active">
+                    <description>Handles all SQLite transactions and the Append-Only Version Ledger for architecture documents.</description>
+                    <visualizer-description>Data access object isolating SQL operations, search logic, and history snapshot generation for the Architecture module.</visualizer-description>
+                    <inputs>db-connection.js</inputs>
+                    <outputs>architecture-controller.js</outputs>
+                </file>
+                <file name="db-connection.js" status="active">
+                    <description>Initializes better-sqlite3, enforces PRAGMA constraints, and handles the connection singleton.</description>
+                    <visualizer-description>Singleton orchestrator establishing the synchronous better-sqlite3 connection, turning on WAL mode, and enforcing strict foreign key PRAGMA rules.</visualizer-description>
+                    <inputs>master-schema-init.sql</inputs>
+                    <outputs>kanban-db-manager.js, architecture-db-manager.js, main.js</outputs>
+                </file>
+                <file name="kanban-db-manager.js" status="active">
+                    <description>CRUD operations for Kanban projects, columns, cards, and file attachments.</description>
+                    <visualizer-description>Data access object isolating all SQL insert, update, and delete logic specifically for the Kanban project management ecosystem.</visualizer-description>
+                    <inputs>db-connection.js, kanban-controller.js</inputs>
+                    <outputs>kanban-controller.js</outputs>
+                </file>
+                <file name="master-schema-init.sql" status="active">
+                    <description>The foundational DDL script for initializing the local database.</description>
+                    <visualizer-description>The foundational Data Definition Language (DDL) script. Executed on boot to structure all multi-tenant tables, relationships, and universal seed data.</visualizer-description>
+                    <inputs>None</inputs>
+                    <outputs>db-connection.js</outputs>
+                </file>
+            </directory>
+
+            <directory name="main">
+                <visualizer-description>The Node.js backend executing the Electron main process, responsible for native OS interactions, window lifecycles, and the secure IPC bridge.</visualizer-description>
+                <file name="domain-orchestrator.js" status="active">
+                    <description>Centralized registrar that initializes and binds all IPC controllers.</description>
+                    <visualizer-description>A central registry that imports and systematically binds all isolated IPC controllers to the main Electron process upon initialization.</visualizer-description>
+                    <inputs>architecture-controller.js, context-compressor-controller.js, data-management-controller.js, documentation-controller.js, environment-controller.js, kanban-controller.js, payload-integrator-controller.js, system-controller.js, visualizer-controller.js, workspace-controller.js</inputs>
+                    <outputs>main.js</outputs>
+                </file>
+                <file name="main.js" status="active">
+                    <description>Electron application entry point. Orchestrates window creation and lifecycle events.</description>
+                    <visualizer-description>The entry point for the entire application. Bootstraps the Electron window, manages OS-level lifecycle events (ready, quit), and initializes the database connection.</visualizer-description>
+                    <inputs>domain-orchestrator.js, preload.js, db-connection.js</inputs>
+                    <outputs>index.html (Window Creation)</outputs>
+                </file>
+                <file name="preload.js" status="active">
+                    <description>Context bridge defining the highly restricted API between the renderer and main processes.</description>
+                    <visualizer-description>The critical context bridge. Exposes a highly restricted, read-only API surface to the renderer process to prevent malicious arbitrary code execution.</visualizer-description>
+                    <inputs>main.js, All IPC Controllers</inputs>
+                    <outputs>All Renderer JS Scripts</outputs>
+                </file>
+                
+                <directory name="ipc-controllers">
+                    <visualizer-description>The routing layer where incoming renderer requests are intercepted and directed to specific backend operations safely.</visualizer-description>
+                    <file name="architecture-controller.js" status="active">
+                        <description>Orchestrates the IPC bridge for the Architecture UI and SQLite database.</description>
+                        <visualizer-description>Listens for architecture interactions (creating, saving, fetching history, searching) and executes the corresponding transactions against the database.</visualizer-description>
+                        <inputs>architecture-renderer.js (IPC Request), architecture-db-manager.js</inputs>
+                        <outputs>architecture-renderer.js (IPC Response)</outputs>
+                    </file>
+                    <file name="context-compressor-controller.js" status="active">
+                        <description>Backend orchestrator for reading local file systems and generating directory trees.</description>
+                        <visualizer-description>Securely traverses the local file system to generate workspace directory trees and fetch raw text contents for payload compilation, preventing path traversal attacks.</visualizer-description>
+                        <inputs>context-compressor-renderer.js (IPC Request), Physical File System</inputs>
+                        <outputs>context-compressor-renderer.js (IPC Response)</outputs>
+                    </file>
+                    <file name="data-management-controller.js" status="active">
+                        <description>Orchestrates backend IPC handlers for database backups, restoration, and JSON migration.</description>
+                        <visualizer-description>Intercepts front-end triggers for data sovereignty tasks, orchestrating local SQLite snapshots, JSON exports, and zip archive generation.</visualizer-description>
+                        <inputs>data-management-renderer.js (IPC Request), better-sqlite3</inputs>
+                        <outputs>data-management-renderer.js (IPC Response), ZIP Archive</outputs>
+                    </file>
+                    <file name="documentation-controller.js" status="active">
+                        <description>Routes IPC calls handling documentation and constraint view states.</description>
+                        <visualizer-description>Manages backend operations for the Document Management system, executing the pipeline that merges project variables into Markdown templates.</visualizer-description>
+                        <inputs>document-management.html (IPC Request), template files</inputs>
+                        <outputs>document-management.html (IPC Response)</outputs>
+                    </file>
+                    <file name="environment-controller.js" status="active">
+                        <description>Routes IPC calls handling environment variables and settings configuration.</description>
+                        <visualizer-description>Manages backend operations for the Environment Settings dashboard, handling secure read and write operations against the environment_variables table.</visualizer-description>
+                        <inputs>environment-settings.html (IPC Request), environment_variables</inputs>
+                        <outputs>environment-settings.html (IPC Response)</outputs>
+                    </file>
+                    <file name="kanban-controller.js" status="active">
+                        <description>Routes IPC calls for Kanban board orchestration, drag-and-drop updates, and OS attachment handoffs.</description>
+                        <visualizer-description>Listens for Kanban interactions (drag-and-drops, card edits) and executes the corresponding transactions against the SQLite database.</visualizer-description>
+                        <inputs>kanban-renderer.js (IPC Request), kanban-db-manager.js</inputs>
+                        <outputs>kanban-renderer.js (IPC Response), kanban-db-manager.js</outputs>
+                    </file>
+                    <file name="payload-integrator-controller.js" status="active">
+                        <description>Backend orchestrator for securely intercepting, validating, and physically writing LLM-generated code payloads to the local filesystem.</description>
+                        <visualizer-description>Implements strict path traversal lockdown and atomic pre-flight snapshots to ensure safe execution of automated codebase modifications.</visualizer-description>
+                        <inputs>payload-integrator-renderer.js (IPC Request), Physical File System</inputs>
+                        <outputs>payload-integrator-renderer.js (IPC Response), Local Files (Write)</outputs>
+                    </file>
+                    <file name="system-controller.js" status="active">
+                        <description>Handles window controls, theme toggling, and app-level OS events.</description>
+                        <visualizer-description>Handles native desktop environment requests like window maximization, minification, and triggering the master quit function.</visualizer-description>
+                        <inputs>renderer.js (IPC Request)</inputs>
+                        <outputs>OS Window State</outputs>
+                    </file>
+                    <file name="visualizer-controller.js" status="active">
+                        <description>Routes IPC calls for both the Codebase Explorer and Schema Visualizer.</description>
+                        <visualizer-description>Backend orchestrator for securely reading codebase.xml and master-schema-init.sql, delivering the raw text data to the frontend visualizations.</visualizer-description>
+                        <inputs>codebase-explorer-renderer.js, schema-visualizer-renderer.js</inputs>
+                        <outputs>Renderer UI (IPC Response)</outputs>
+                    </file>
+                    <file name="workspace-controller.js" status="active">
+                        <description>Orchestrates backend IPC handlers for workspace initialization, deletion, and telemetry sync.</description>
+                        <visualizer-description>Routes backend interactions for the Workspace Admin hub, handling SQLite data inserts for multi-tenant environments and telemetry ledgers.</visualizer-description>
+                        <inputs>workspace-admin-renderer.js, db-connection.js</inputs>
+                        <outputs>workspace-admin-renderer.js</outputs>
+                    </file>
+                </directory>
+            </directory>
+
+            <directory name="python">
+                <description>Reserved for local sidecar scripts handling advanced data processing.</description>
+                <visualizer-description>Designated staging area for localized Python scripts or sidecars intended for heavy data processing outside the V8 engine.</visualizer-description>
+            </directory>
+
+            <directory name="renderer">
+                <visualizer-description>The frontend presentation and interaction layer. Contains all HTML templates representing the visual modules of the Gossip OS.</visualizer-description>
+                <file name="about.html" status="active">
+                    <description>Application information and version window.</description>
+                    <visualizer-description>A static modal interface rendering system versioning, Electron architecture info, and attribution details.</visualizer-description>
+                    <inputs>about.css, about-renderer.js</inputs>
+                    <outputs>UI Viewport</outputs>
+                </file>
+                <file name="architecture.html" status="active">
+                    <description>Interface for defining structural rules, constraints, and viewing architectural markdown documents.</description>
+                    <visualizer-description>A split-pane workspace dynamically routed into the main stage for managing interactive, versioned architecture documentation.</visualizer-description>
+                    <inputs>architecture.css, architecture-renderer.js, variables.css</inputs>
+                    <outputs>UI Viewport</outputs>
+                </file>
+                <file name="codebase-explorer.html" status="active">
+                    <description>Interactive visualizer for the codebase architecture.</description>
+                    <visualizer-description>A split-pane interface rendering a D3.js Indented Tree of the physical file system alongside a dependency DAG mapped from codebase.xml.</visualizer-description>
+                    <inputs>codebase-explorer.css, codebase-explorer-renderer.js, variables.css</inputs>
+                    <outputs>UI Viewport</outputs>
+                </file>
+                <file name="context-compressor.html" status="active">
+                    <description>Split-pane interface for staging files, configuring compression rules, and visualizing LLM token payloads.</description>
+                    <visualizer-description>The staging UI for the LLM Command Center, providing a file tree navigator, token calculation meters, and custom compression toggle rules.</visualizer-description>
+                    <inputs>context-compressor.css, context-compressor-renderer.js, variables.css</inputs>
+                    <outputs>UI Viewport</outputs>
+                </file>
+                <file name="data-management.html" status="active">
+                    <description>Interface for database backups, exports, and data restoration.</description>
+                    <visualizer-description>The command center for data sovereignty, featuring a grid of interactive cards to trigger manual database backups and deep system restores.</visualizer-description>
+                    <inputs>data-management.css, data-management-renderer.js, variables.css</inputs>
+                    <outputs>UI Viewport</outputs>
+                </file>
+                <file name="document-management.html" status="active">
+                    <description>Split-pane interface for compiling and viewing context compressions and specification documents.</description>
+                    <visualizer-description>This structural wrapper establishes the split-pane flexbox layout, the template pick list, and the right-hand render stage for both compiled documents and file metadata.</visualizer-description>
+                    <inputs>document-management.css, variables.css</inputs>
+                    <outputs>UI Viewport</outputs>
+                </file>
+                <file name="documentation.html" status="active">
+                    <description>Offline user manual and technical constraints viewer.</description>
+                    <visualizer-description>The offline manual serving as a static, scroll-spy-enabled technical guide detailing the architectural constraints and operational philosophy of Gossip OS.</visualizer-description>
+                    <inputs>documentation.css, documentation.js, variables.css</inputs>
+                    <outputs>UI Viewport</outputs>
+                </file>
+                <file name="environment-settings.html" status="active">
+                    <description>Categorized dashboard and token-input questionnaire for managing global project variables.</description>
+                    <visualizer-description>A highly interactive form layout utilizing dynamic token-input fields for configuring and persisting global Multi-Tenant project variables.</visualizer-description>
+                    <inputs>environment-settings.css, variables.css</inputs>
+                    <outputs>UI Viewport</outputs>
+                </file>
+                <file name="index.html" status="active">
+                    <description>The primary command center dashboard for Chronoql Gossip.</description>
+                    <visualizer-description>The master shell for the application. Establishes the core flexbox architecture, persistent sidebar navigation, and the dynamic staging area for all active modules.</visualizer-description>
+                    <inputs>index.css, variables.css, renderer.js, d3.min.js</inputs>
+                    <outputs>OS Master Shell</outputs>
+                </file>
+                <file name="kanban.html" status="active">
+                    <description>Component template for the Kanban Orchestration board.</description>
+                    <visualizer-description>The macro template for the project management board, structuring columns and atomic tasks for drag-and-drop workflow orchestration.</visualizer-description>
+                    <inputs>kanban.css, kanban-renderer.js, variables.css</inputs>
+                    <outputs>UI Viewport</outputs>
+                </file>
+                <file name="license.html" status="active">
+                    <description>Software license agreement window.</description>
+                    <visualizer-description>A dedicated viewport displaying the legal software licensing and usage agreements governing the Chronoql environment.</visualizer-description>
+                    <inputs>license.css, license-renderer.js</inputs>
+                    <outputs>UI Viewport</outputs>
+                </file>
+                <file name="payload-integrator.html" status="active">
+                    <description>Interface for safely ingesting and writing LLM-generated code payloads.</description>
+                    <visualizer-description>A dual-pane layout featuring a JSON ingestion stage and a Pre-Flight Review dashboard for staging automated file modifications.</visualizer-description>
+                    <inputs>payload-integrator.css, payload-integrator-renderer.js, variables.css</inputs>
+                    <outputs>UI Viewport</outputs>
+                </file>
+                <file name="schema-visualizer.html" status="active">
+                    <description>Interactive visualizer for the SQLite database schema.</description>
+                    <visualizer-description>Renders a D3.js Tidy Tree mapping the relational database structure, dynamically parsed from the raw DDL schema file.</visualizer-description>
+                    <inputs>schema-visualizer.css, schema-visualizer-renderer.js, variables.css</inputs>
+                    <outputs>UI Viewport</outputs>
+                </file>
+                <file name="TEST-payload-integrator.html" status="active">
+                    <description>Test staging component for the payload integrator.</description>
+                    <visualizer-description>An isolated test environment for validating payload parsing and integration logic before merging into the main module.</visualizer-description>
+                    <inputs>TEST-payload-renderer.js</inputs>
+                    <outputs>UI Viewport</outputs>
+                </file>
+                <file name="workspace-admin.html" status="active">
+                    <description>Interface for managing workspaces, global variables, and telemetry dashboards.</description>
+                    <visualizer-description>The multi-tenant orchestration hub featuring D3 telemetry charts, dynamic token environments, and workspace initialization forms.</visualizer-description>
+                    <inputs>workspace-admin.css, workspace-admin-renderer.js, variables.css</inputs>
+                    <outputs>UI Viewport</outputs>
+                </file>
+                
+                <directory name="css">
+                    <visualizer-description>Pure CSS styling directories implementing the application's design system, layout physics, and high-contrast accessibility standards without external frameworks.</visualizer-description>
+                    <file name="about.css" status="active">
+                        <description>Styling for the about window.</description>
+                        <visualizer-description>Defines the visual constraints and layout hierarchy specifically for the static about modal.</visualizer-description>
+                        <inputs>variables.css</inputs>
+                        <outputs>about.html</outputs>
+                    </file>
+                    <file name="architecture.css" status="active">
+                        <description>Styling for the architecture document viewer, segmented controls, and history UI.</description>
+                        <visualizer-description>Governs the flexbox states for the Markdown editor, syntax highlighting, and nested blockquote typography specific to the architecture module.</visualizer-description>
+                        <inputs>variables.css</inputs>
+                        <outputs>architecture.html</outputs>
+                    </file>
+                    <file name="codebase-explorer.css" status="active">
+                        <description>Styling for the Codebase Explorer.</description>
+                        <visualizer-description>Defines the layout constraints, SVG node color-coding, and transition physics for the codebase dependency visualizations.</visualizer-description>
+                        <inputs>variables.css</inputs>
+                        <outputs>codebase-explorer.html</outputs>
+                    </file>
+                    <file name="context-compressor.css" status="active">
+                        <description>Styling for the file explorer sidebar, compression config stage, and code preview.</description>
+                        <visualizer-description>Establishes the split-pane file tree UI, custom CSS toggle switches, and the read-only code editor aesthetics for payload previews.</visualizer-description>
+                        <inputs>variables.css</inputs>
+                        <outputs>context-compressor.html</outputs>
+                    </file>
+                    <file name="data-management.css" status="active">
+                        <description>Styling for the data management and backup interface.</description>
+                        <visualizer-description>Applies CSS Grid logic for the modular backup cards and danger-zone visual states for system reset functions.</visualizer-description>
+                        <inputs>variables.css</inputs>
+                        <outputs>data-management.html</outputs>
+                    </file>
+                    <file name="document-management.css" status="active">
+                        <description>Styling for the document management split-pane and read-only compiled stage.</description>
+                        <visualizer-description>Governs the split-pane flexbox logic, styling the navigation sidebar and the Markdown output stage for technical reading.</visualizer-description>
+                        <inputs>variables.css</inputs>
+                        <outputs>document-management.html</outputs>
+                    </file>
+                    <file name="documentation.css" status="active">
+                        <description>Typography and layout styling for the offline documentation.</description>
+                        <visualizer-description>Establishes the scroll-spy layout, article formatting, and typography scale for the system manual.</visualizer-description>
+                        <inputs>variables.css</inputs>
+                        <outputs>documentation.html</outputs>
+                    </file>
+                    <file name="environment-settings.css" status="active">
+                        <description>Styling for the variable management dashboard and interactive token inputs.</description>
+                        <visualizer-description>Orchestrates the dynamic token-input "chip" aesthetics, typeahead dropdown layers, and categorized form spacing.</visualizer-description>
+                        <inputs>variables.css</inputs>
+                        <outputs>environment-settings.html</outputs>
+                    </file>
+                    <file name="index.css" status="active">
+                        <description>Structural and component styling for the main dashboard.</description>
+                        <visualizer-description>The foundational stylesheet detailing the Rock-Sponge-Rock master flex layout and global shell states.</visualizer-description>
+                        <inputs>variables.css</inputs>
+                        <outputs>index.html</outputs>
+                    </file>
+                    <file name="kanban.css" status="active">
+                        <description>Styling for the Kanban board, custom color picker, and attachment layouts.</description>
+                        <visualizer-description>Manages the horizontal scrolling columns, absolute-positioned drag states, and custom UI components for card attachments.</visualizer-description>
+                        <inputs>variables.css</inputs>
+                        <outputs>kanban.html</outputs>
+                    </file>
+                    <file name="license.css" status="active">
+                        <description>Styling for the license agreement window.</description>
+                        <visualizer-description>Provides scrolling constraints and typography rules for the densely text-heavy license modal.</visualizer-description>
+                        <inputs>variables.css</inputs>
+                        <outputs>license.html</outputs>
+                    </file>
+                    <file name="payload-integrator.css" status="active">
+                        <description>Styling for the Payload Integrator module.</description>
+                        <visualizer-description>Orchestrates the 50/50 flexbox staging layout and the JSON input editor aesthetics.</visualizer-description>
+                        <inputs>variables.css</inputs>
+                        <outputs>payload-integrator.html</outputs>
+                    </file>
+                    <file name="schema-visualizer.css" status="active">
+                        <description>Styling for the Schema Visualizer.</description>
+                        <visualizer-description>Manages the flexbox layout, D3.js node styling, and the data dictionary slide-up drawer aesthetics.</visualizer-description>
+                        <inputs>variables.css</inputs>
+                        <outputs>schema-visualizer.html</outputs>
+                    </file>
+                    <file name="variables.css" status="active">
+                        <description>Global CSS variables for light/dark themes and brand colors.</description>
+                        <visualizer-description>The design token registry mapping all CSS custom properties for brand colors, background surfaces, typography layers, and dynamic spacing.</visualizer-description>
+                        <inputs>None</inputs>
+                        <outputs>All CSS Files</outputs>
+                    </file>
+                    <file name="workspace-admin.css" status="active">
+                        <description>Styling for the workspace orchestrator and telemetry dashboards.</description>
+                        <visualizer-description>Dictates the grid layouts for the workspace cards, telemetry chart mounts, and modal positioning.</visualizer-description>
+                        <inputs>variables.css</inputs>
+                        <outputs>workspace-admin.html</outputs>
+                    </file>
+                </directory>
+
+                <directory name="js">
+                    <visualizer-description>Vanilla JavaScript orchestrators bridging the UI components with the preload IPC channels, handling DOM manipulation and state management.</visualizer-description>
+                    <file name="about-renderer.js" status="active">
+                        <description>Logic for the about window.</description>
+                        <visualizer-description>Fetches exact versioning data and system metrics through the IPC bridge to render in the about modal.</visualizer-description>
+                        <inputs>preload.js, about.html</inputs>
+                        <outputs>about.html (DOM Update)</outputs>
+                    </file>
+                    <file name="architecture-renderer.js" status="active">
+                        <description>Orchestrates the 3-state Markdown Editor, native compilation, and version ledger for architecture docs.</description>
+                        <visualizer-description>Provides frontend orchestration for editing, previewing, and restoring historical architecture documents through the UI.</visualizer-description>
+                        <inputs>preload.js, architecture.html, architecture-controller.js (IPC Response)</inputs>
+                        <outputs>architecture.html (DOM Update), architecture-controller.js (IPC Request)</outputs>
+                    </file>
+                    <file name="codebase-explorer-renderer.js" status="active">
+                        <description>Logic for rendering the Codebase Explorer.</description>
+                        <visualizer-description>Parses the XML manifest using fast-xml-parser, manages the D3.js simulation engines, and handles dependency graph interactivity.</visualizer-description>
+                        <inputs>preload.js, codebase-explorer.html, visualizer-controller.js (IPC Response)</inputs>
+                        <outputs>codebase-explorer.html (DOM Update), visualizer-controller.js (IPC Request)</outputs>
+                    </file>
+                    <file name="context-compressor-renderer.js" status="active">
+                        <description>Orchestrates file staging, rule toggling, token estimation, and payload compilation.</description>
+                        <visualizer-description>The frontend engine controlling file selection arrays, dynamic regex-based code minification, and visual token-weight calculations.</visualizer-description>
+                        <inputs>preload.js, context-compressor.html, context-compressor-controller.js (IPC Response)</inputs>
+                        <outputs>context-compressor.html (DOM Update), context-compressor-controller.js (IPC Request)</outputs>
+                    </file>
+                    <file name="data-management-renderer.js" status="active">
+                        <description>Logic handling database exports and backup orchestration.</description>
+                        <visualizer-description>Binds event listeners to the backup UI elements, triggering synchronous data snapshots and rendering success/failure states.</visualizer-description>
+                        <inputs>preload.js, data-management.html, data-management-controller.js (IPC Response)</inputs>
+                        <outputs>data-management.html (DOM Update), data-management-controller.js (IPC Request)</outputs>
+                    </file>
+                    <file name="documentation.js" status="active">
+                        <description>Scrollspy and navigation logic for the documentation viewer.</description>
+                        <visualizer-description>Utilizes the Intersection Observer API to synchronize the active state of the sidebar Table of Contents with the viewport scroll position.</visualizer-description>
+                        <inputs>documentation.html</inputs>
+                        <outputs>documentation.html (DOM Update)</outputs>
+                    </file>
+                    <file name="kanban-renderer.js" status="active">
+                        <description>Logic for Kanban board interactions, drag-and-drop orchestration, and attachment management.</description>
+                        <visualizer-description>A dense interaction controller managing HTML5 Drag and Drop events, dynamic column generation, and real-time backend updates for project orchestration.</visualizer-description>
+                        <inputs>preload.js, kanban.html, kanban-controller.js (IPC Response)</inputs>
+                        <outputs>kanban.html (DOM Update), kanban-controller.js (IPC Request)</outputs>
+                    </file>
+                    <file name="license-renderer.js" status="active">
+                        <description>Logic for the license window.</description>
+                        <visualizer-description>A minimal binding script to handle the close action of the license modal.</visualizer-description>
+                        <inputs>license.html</inputs>
+                        <outputs>license.html (DOM Update)</outputs>
+                    </file>
+                    <file name="payload-integrator-renderer.js" status="active">
+                        <description>Logic for parsing JSON payloads and dispatching them to the backend execution engine.</description>
+                        <visualizer-description>Frontend validator that strictly parses incoming JSON, calculates file impacts, and manages the execution flow state.</visualizer-description>
+                        <inputs>preload.js, payload-integrator.html, payload-integrator-controller.js (IPC Response)</inputs>
+                        <outputs>payload-integrator.html (DOM Update), payload-integrator-controller.js (IPC Request)</outputs>
+                    </file>
+                    <file name="renderer.js" status="active">
+                        <description>Core UI orchestration, event listeners, and data fetching for the dashboard.</description>
+                        <visualizer-description>The master frontend controller that parses the sidebar navigation, manages the dynamic DOM injection for modules, and synchronizes the global multi-tenant project state.</visualizer-description>
+                        <inputs>preload.js, index.html, system-controller.js (IPC Response)</inputs>
+                        <outputs>index.html (DOM Update), system-controller.js (IPC Request)</outputs>
+                    </file>
+                    <file name="schema-visualizer-renderer.js" status="active">
+                        <description>Logic for rendering the Schema Visualizer.</description>
+                        <visualizer-description>Custom SQL parser that extracts tables, columns, and foreign keys from the DDL file to feed the D3.js rendering engine.</visualizer-description>
+                        <inputs>preload.js, schema-visualizer.html, visualizer-controller.js (IPC Response)</inputs>
+                        <outputs>schema-visualizer.html (DOM Update), visualizer-controller.js (IPC Request)</outputs>
+                    </file>
+                    <file name="TEST-payload-renderer.js" status="active">
+                        <description>Test script for payload integration frontend logic.</description>
+                        <visualizer-description>Isolated script for running DOM updates and IPC bridge requests for the payload test staging environment.</visualizer-description>
+                        <inputs>TEST-payload-integrator.html</inputs>
+                        <outputs>TEST-payload-integrator.html (DOM Update)</outputs>
+                    </file>
+                    <file name="workspace-admin-renderer.js" status="active">
+                        <description>Logic for workspace management, dynamic D3 telemetry charts, and SQLite variable saving.</description>
+                        <visualizer-description>Synchronizes global application state, orchestrating the interactive schema picker and the D3.js ROI visualizations.</visualizer-description>
+                        <inputs>preload.js, workspace-admin.html, workspace-controller.js (IPC Response)</inputs>
+                        <outputs>workspace-admin.html (DOM Update), workspace-controller.js (IPC Request)</outputs>
+                    </file>
+                </directory>
+            </directory>
+
+            <directory name="templates">
+                <description>Stores template files utilized for markdown generation and exports.</description>
+                <visualizer-description>The raw markdown and HTML boilerplate fragments utilized by the Document Management System's injection pipeline.</visualizer-description>
+            </directory>
+
+        </directory>
+    </structure>
+</codebase>

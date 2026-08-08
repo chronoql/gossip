@@ -1,0 +1,150 @@
+<div class="schema-container">
+    <div class="split-pane-layout">
+        
+        <section class="schema-stage-left">
+            <header class="stage-header-local">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <h2>Relational Schema Map</h2>
+                    <div style="display: flex; align-items: center; gap: 4px;">
+                        <button id="btn-refresh-schema" class="btn-icon btn-tiny" title="Sync with Schema Manifest">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="23 4 23 10 17 10"></polyline>
+                                <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+                            </svg>
+                        </button>
+                        <button id="btn-recenter-schema-view" class="btn-icon btn-tiny" title="Reset Camera View">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                        </button>
+                    </div>
+                    <button id="btn-reset-schema" class="btn-secondary btn-tiny" style="display: none;">Reset Edges</button>
+                </div>
+                <button id="btn-toggle-schema-legend" class="btn-secondary btn-tiny" title="Toggle Geometric Syntax Legend">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="16" x2="12" y2="12"></line>
+                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                    </svg>
+                    Syntax Legend
+                </button>
+            </header>
+
+            <div class="explorer-search-bar" style="padding: 10px 20px; border-bottom: 1px solid var(--border-color); background-color: var(--bg-color); flex-shrink: 0; position: relative; z-index: 15;">
+                <div class="tree-search-wrapper" style="position: relative;">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <input type="text" id="schema-search-input" placeholder="Find table or view..." autocomplete="off">
+                    <button id="btn-schema-regex-toggle" class="regex-toggle-btn" title="Use Regular Expression" data-active="false">.*</button>
+                    <div id="schema-search-dropdown" class="custom-autocomplete-dropdown" style="display: none;"></div>
+                </div>
+            </div>
+
+            <div id="d3-schema-tree-mount" class="schema-surface">
+                </div>
+
+            <aside id="schema-legend-drawer" class="syntax-legend-drawer">
+                <div class="legend-header">
+                    <h3>Schema Syntax</h3>
+                    <button id="btn-close-schema-legend" class="btn-icon btn-tiny" title="Close Legend">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+                <div class="legend-body">
+                    
+                    <h4 class="legend-section-title">Entity Shapes</h4>
+                    <ul class="legend-list">
+                        <li>
+                            <span class="shape-ref shape-circle" style="background-color: #ff7f0e; border-color: #ff7f0e;"></span> 
+                            <strong>Tables:</strong> Standard physical tables
+                        </li>
+                        <li>
+                            <span class="shape-ref" style="display: inline-block; width: 11px; height: 11px; background-color: #d62728; border: 2px solid #d62728; border-radius: 2px; transform: rotate(45deg); margin-left: 2px; margin-right: 9px; vertical-align: middle;"></span> 
+                            <strong>Views:</strong> Virtual / derived tables
+                        </li>
+                    </ul>
+                    
+                    <hr class="legend-divider">
+
+                    <h4 class="legend-section-title">Architectural Domains</h4>
+                    <ul class="legend-list">
+                        <li><span class="shape-ref shape-circle" style="background-color: #1f77b4; border-color: #1f77b4;"></span> <strong>Core Engine:</strong> Workspaces, Environment</li>
+                        <li><span class="shape-ref shape-circle" style="background-color: #9467bd; border-color: #9467bd;"></span> <strong>Telemetry:</strong> Ledger, Diagnostics</li>
+                        <li><span class="shape-ref shape-circle" style="background-color: #2ca02c; border-color: #2ca02c;"></span> <strong>Architecture:</strong> Docs, Lineage</li>
+                        <li><span class="shape-ref shape-circle" style="background-color: #d62728; border-color: #d62728;"></span> <strong>Kanban:</strong> Projects, Columns, Cards</li>
+                        <li><span class="shape-ref shape-circle child-node" style="border-color: var(--text-muted);"></span> <strong>Child Node:</strong> Inherits domain from parent</li>
+                    </ul>
+                    
+                    <hr class="legend-divider">
+                    
+                    <h4 class="legend-section-title">Relational Lineage</h4>
+                    <ul class="legend-list">
+                        <li>
+                            <span class="edge-ref edge-solid">
+                                <svg width="30" height="10" viewBox="0 0 30 10"><line x1="0" y1="5" x2="30" y2="5" stroke="currentColor" stroke-width="2"/></svg>
+                            </span> 
+                            <strong>Foreign Key Link:</strong> Structural constraint
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+        </section>
+
+        <div id="schema-stage-resizer" class="vertical-drag-handle" title="Drag to resize panels"></div>
+
+        <section class="schema-stage-right">
+            
+            <div class="inspector-panel schema-panel-top">
+                <header class="panel-header">
+                    <div class="header-title-group">
+                        <h2>Data Dictionary</h2>
+                        <span id="schema-selected-table-name" class="selected-node-badge table-badge">No Entity Selected</span>
+                    </div>
+                </header>
+                <div class="schema-dictionary">
+                    <div class="meta-group">
+                        <h4>Columns</h4>
+                        <div id="schema-columns-list" class="schema-list-container">
+                            <p class="empty-state-text">Select a node to view its structural columns.</p>
+                        </div>
+                    </div>
+                    <div class="meta-group">
+                        <h4>Foreign Keys (Outgoing)</h4>
+                        <div id="schema-fk-list" class="schema-list-container">
+                            <p class="empty-state-text">Select a node to view its architectural dependencies.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="schema-ddl-resizer" class="horizontal-drag-handle" title="Drag to resize DDL viewer"></div>
+
+            <div class="inspector-panel schema-panel-bottom">
+                <header class="panel-header">
+                    <div class="header-title-group">
+                        <h2>Data Definition Language (DDL)</h2>
+                        <span class="header-subtitle">Raw Generation Script</span>
+                    </div>
+                    <button id="btn-copy-ddl" class="btn-icon btn-tiny" title="Copy Raw SQL" disabled>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                    </button>
+                </header>
+                <div class="ddl-viewer-container">
+                    <pre><code id="schema-raw-ddl" class="sql-code empty-state-code">-- Select a table or view from the relational map 
+-- to inspect its exact SQL statement.</code></pre>
+                </div>
+            </div>
+            
+        </section>
+        
+    </div>
+</div>

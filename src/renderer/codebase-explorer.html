@@ -1,0 +1,150 @@
+<div class="explorer-container">
+    <div class="split-pane-layout">
+        
+        <section class="stage-left codebase-stage-left">
+            <header class="stage-header-local">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <h2>System Architecture Tree</h2>
+                    <button id="btn-refresh-cb-tree" class="btn-icon btn-tiny" title="Refresh Graph from codebase.xml">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="23 4 23 10 17 10"></polyline>
+                            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+                        </svg>
+                    </button>
+                </div>
+                <button id="btn-toggle-cb-legend" class="btn-secondary btn-tiny" title="Toggle Geometric Syntax Legend">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="16" x2="12" y2="12"></line>
+                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                    </svg>
+                    Syntax Legend
+                </button>
+            </header>
+
+            <div class="explorer-search-bar">
+                <div class="tree-search-wrapper" style="position: relative;">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <input type="text" id="cb-tree-search-input" placeholder="Find file in tree..." autocomplete="off">
+                    
+                    <button id="btn-cb-regex-toggle" class="regex-toggle-btn" title="Use Regular Expression" data-active="false">.*</button>
+                    
+                    <div id="cb-tree-search-dropdown" class="custom-autocomplete-dropdown" style="display: none;"></div>
+                </div>
+            </div>
+            
+            <div id="d3-codebase-tree-mount" class="d3-mount-surface">
+                </div>
+
+            <aside id="cb-legend-drawer" class="syntax-legend-drawer">
+                <div class="legend-header">
+                    <h3>Geometric Syntax</h3>
+                    <button id="btn-close-cb-legend" class="btn-icon btn-tiny" title="Close Legend">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                </div>
+                <div class="legend-body">
+                    <h4 class="legend-section-title">Node Shapes</h4>
+                    <ul class="legend-list">
+                        <li><span class="shape-ref shape-rect"></span> <strong>Rectangles:</strong> Directories &amp; Folders</li>
+                        <li><span class="shape-ref shape-pentagon"></span> <strong>Pentagons:</strong> Markdown Architecture (.md)</li>
+                        <li><span class="shape-ref shape-triangle"></span> <strong>Triangles:</strong> External Documents (.pdf, .docx)</li>
+                        <li><span class="shape-ref shape-diamond"></span> <strong>Diamonds:</strong> Logic &amp; Controllers (.js, .py, .sh)</li>
+                        <li><span class="shape-ref shape-circle"></span> <strong>Circles:</strong> Database &amp; Data (.sql, .db, .csv)</li>
+                        <li><span class="shape-ref shape-hex"></span> <strong>Hexagons:</strong> View &amp; Presentation (.html, .jsx)</li>
+                        <li><span class="shape-ref shape-pill"></span> <strong>Pills:</strong> Styling (.css, .scss)</li>
+                        <li><span class="shape-ref shape-octagon"></span> <strong>Octagons:</strong> Config &amp; Infrastructure (.json, .env)</li>
+                        <li><span class="shape-ref shape-generic"></span> <strong>Squares:</strong> Generic / Unknown Files</li>
+                    </ul>
+                    
+                    <hr class="legend-divider">
+                    
+                    <h4 class="legend-section-title">Connection Edges</h4>
+                    <ul class="legend-list">
+                        <li>
+                            <span class="edge-ref edge-solid">
+                                <svg width="30" height="10" viewBox="0 0 30 10"><line x1="0" y1="5" x2="26" y2="5" stroke="currentColor" stroke-width="2"/><polygon points="24,1 30,5 24,9" fill="currentColor"/></svg>
+                            </span> 
+                            <strong>Solid + Solid Arrow:</strong> Synchronous / Hard Dependency
+                        </li>
+                        <li>
+                            <span class="edge-ref edge-dashed">
+                                <svg width="30" height="10" viewBox="0 0 30 10"><line x1="0" y1="5" x2="26" y2="5" stroke="currentColor" stroke-width="2" stroke-dasharray="4 2"/><polyline points="24,1 30,5 24,9" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+                            </span> 
+                            <strong>Dashed + Open Arrow:</strong> Asynchronous / IPC Event
+                        </li>
+                    </ul>
+                </div>
+            </aside>
+        </section>
+
+        <div id="cb-stage-resizer" class="vertical-drag-handle" title="Drag to resize panels"></div>
+
+        <section class="stage-right codebase-stage-right">
+            
+            <div class="inspector-panel panel-top cb-panel-top">
+                <header class="panel-header">
+                    <div class="header-title-group">
+                        <h2>Metadata Inspector</h2>
+                        <span id="cb-selected-node-name" class="selected-node-badge">No File Selected</span>
+                    </div>
+                </header>
+                <div class="metadata-content">
+                    <div class="meta-group">
+                        <h4>Description</h4>
+                        <p id="cb-meta-desc" class="meta-text empty-state-text">Select a node from the structural tree to view its standard description.</p>
+                    </div>
+                    <div class="meta-group">
+                        <h4>Visualizer Description</h4>
+                        <p id="cb-meta-vis-desc" class="meta-text empty-state-text">Select a node to view its architectural visualizer metadata.</p>
+                    </div>
+                    <div class="meta-grid">
+                        <div class="meta-group">
+                            <h4>Inputs</h4>
+                            <div id="cb-meta-inputs" class="meta-tags">
+                                <span class="meta-tag empty-tag">None</span>
+                            </div>
+                        </div>
+                        <div class="meta-group">
+                            <h4>Outputs</h4>
+                            <div id="cb-meta-outputs" class="meta-tags">
+                                <span class="meta-tag empty-tag">None</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="cb-dag-resizer" class="horizontal-drag-handle" title="Drag to resize DAG view"></div>
+
+            <div class="inspector-panel panel-bottom cb-panel-bottom">
+                <header class="panel-header">
+                    <div class="header-title-group">
+                        <h2>Localized Execution Flow</h2>
+                        <span class="header-subtitle">Directed Acyclic Graph (DAG)</span>
+                    </div>
+                </header>
+                <div id="d3-codebase-dag-mount" class="d3-mount-surface dag-surface">
+                    <div id="dag-empty-state" class="empty-state-local">
+                        <svg class="empty-state-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="18" cy="5" r="3"></circle>
+                            <circle cx="6" cy="12" r="3"></circle>
+                            <circle cx="18" cy="19" r="3"></circle>
+                            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                        </svg>
+                        <p>Select a file to map its specific inputs and outputs.</p>
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+        
+    </div>
+</div>

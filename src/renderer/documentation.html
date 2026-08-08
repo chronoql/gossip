@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline';">
+    <title>Chronoql Gossip - Documentation</title>
+    
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/documentation.css">
+</head>
+<body>
+    <div class="gossip-doc-container">
+        <nav id="doc-sidebar">
+            <div class="sidebar-brand" style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+                <svg viewBox="0 0 120 120" width="32" height="32" xmlns="http://www.w3.org/2000/svg" style="flex-shrink: 0;">
+                    <circle cx="60" cy="60" r="50" fill="none" stroke="#38bdf8" stroke-width="8" stroke-dasharray="20 10"/>
+                    <circle cx="60" cy="60" r="30" fill="none" stroke="#a855f7" stroke-width="6"/>
+                    <circle cx="60" cy="60" r="10" fill="#22c55e" />
+                </svg>
+                <h2 style="margin: 0; line-height: 1; font-size: 1.5rem; letter-spacing: -0.02em;">chronoql</h2>
+            </div>
+            <p class="sidebar-subtitle" style="margin-top: 0; margin-bottom: 24px; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; color: var(--text-muted); text-transform: uppercase;">GOSSIP OS MANUAL</p>
+            
+            <ul class="doc-toc">
+                <li><a href="#gossip-init" class="toc-link active">Quick Start & Workflow</a></li>
+                <li><a href="#ideation" class="toc-link">Task Board (Kanban)</a></li>
+                <li><a href="#architecture" class="toc-link">Project Rulebook (Architecture)</a></li>
+                <li><a href="#codebase-explorer" class="toc-link">Code Blueprint (Explorer)</a></li>
+                <li><a href="#schema-visualizer" class="toc-link">Database Map (Schema)</a></li>
+                <li><a href="#context-compressor" class="toc-link">AI Exporter (Compressor)</a></li>
+                <li><a href="#payload-integrator" class="toc-link">AI Importer (Integrator)</a></li>
+                <li><a href="#llm-code-review" class="toc-link">AI Code Review (Auditing)</a></li>
+                <li><a href="#quick-tasks" class="toc-link">Global Quick Tasks</a></li>
+                <li><a href="#global-scratchpad" class="toc-link">Global Scratchpad</a></li>
+                <li><a href="#data-management" class="toc-link">Workspace Hub & Data</a></li>
+                <li><a href="#technical-appendix" class="toc-link">Technical Appendix</a></li>
+            </ul>
+
+            <div style="padding: 10px 20px 20px 20px; border-bottom: 1px solid var(--border-color); margin-bottom: 10px; margin-top: auto;">
+                <button type="button" class="btn-secondary" id="btn-sidebar-download-edu-guide" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2-2V5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                    Architecture PDF
+                </button>
+            </div>
+        </nav>
+
+        <main id="doc-content">
+            <article class="doc-article">
+                <h1>Gossip OS Manual</h1>
+                <p class="lead">Welcome to Chronoql Gossip. Whether you are a seasoned systems architect orchestrating enterprise platforms, a data engineer mapping complex relational structures, or an entry-level IT professional building your first application with AI assistance, this platform is designed to bridge the gap between human strategy and AI execution.</p>
+                <p>This manual will guide you through our offline-first tactical command center, ensuring you build secure, scalable, and hallucination-free software.</p>
+                
+                <hr>
+
+                <h2 id="gossip-init">Quick Start & The Gossip Workflow</h2>
+                
+                <p>To get the most out of Gossip, you need a comfortable, repeatable rhythm. The most successful developers follow this core pipeline:</p>
+                <ol>
+                    <li><strong>Define the Rules (Architecture Workspace):</strong> Before asking an AI to write code, define your system boundaries. Establish your standard UI patterns and data rules so the AI doesn't have to guess.</li>
+                    <li><strong>Map the Work (Kanban Orchestration):</strong> Break the overarching goal into bite-sized, actionable tasks.</li>
+                    <li><strong>Package the Context (Context Compressor):</strong> Select only the specific local files the AI needs to understand the current task. Compress them to save prompt space.</li>
+                    <li><strong>Deploy & Generate (Your LLM):</strong> Paste the compressed payload and your architectural rules into your AI of choice, alongside your prompt.</li>
+                    <li><strong>Safely Ingest (Payload Integrator):</strong> Take the AI's generated code, quarantine it in the Integrator, validate the syntax, and safely merge it into your local file system.</li>
+                    <li><strong>Audit the Blueprint (System Visualizers):</strong> Refresh your visual maps to ensure the AI didn't violate your dependency rules or database relationships.</li>
+                </ol>
+
+                <hr>
+
+                <h2 id="ideation">Task Board (Kanban Orchestration)</h2>
+                
+                <h3>What It Is</h3>
+                <p>A lightweight, highly visual project management board. It provides a strict visual hierarchy for task execution, allowing you to break massive software projects down into small, manageable cards grouped by columns (like "To Do", "In Progress", and "Done").</p>
+
+                <h3>How You'll Benefit</h3>
+                <p>Instead of keeping a mental map of what needs to be done—which leads to burnout—the board externalizes your workflow. It prevents overwhelming context switching by keeping your focus strictly on moving one card forward at a time.</p>
+
+                <h3>Targeted Use Cases</h3>
+                <ul>
+                    <li><strong>The Seasoned Architect:</strong> Use the board to map out high-level deployment phases (e.g., "Alpha Testing", "Security Audit", "Production Release").</li>
+                    <li><strong>The Entry-Level Developer:</strong> Break a single feature into atomic micro-steps to prevent feeling overwhelmed (e.g., "Build Form UI", "Write Validation Logic", "Connect to Database").</li>
+                </ul>
+
+                <h3>Getting Started</h3>
+                <ol>
+                    <li>Click <strong>New Project</strong> in the header to create a fresh board.</li>
+                    <li>Click the <strong>+</strong> button on the far right to add your columns (e.g., Backlog, In Progress, Done).</li>
+                    <li>Click <strong>+ Add Card</strong> inside a column to create a task.</li>
+                    <li>Use the <strong>Settings</strong> button to adjust board colors, or the <strong>Duplicate</strong> button to clone an entire project structure for a repeatable workflow.</li>
+                </ol>
+
+                <hr>
+
+                <h2 id="architecture">Project Rulebook (Architecture Workspace)</h2>
+                
+                <h3>What It Is</h3>
+                <p>A dedicated environment for drafting and storing immutable rulesets, functional specifications, and development roadmaps. Establishing firm architectural constraints upfront prevents "AI hallucinations" (when an AI confidently invents bad code) and scope creep.</p>
+
+                <h3>How You'll Benefit</h3>
+                <p>AI models hallucinate when they lack boundaries. By feeding the AI a strict, pre-written rulebook (e.g., "State Management Protocol"), you force the AI to write code that perfectly matches your existing ecosystem on the first try.</p>
+
+                <h3>Targeted Use Cases</h3>
+                <ul>
+                    <li><strong>The Seasoned Architect:</strong> Document strict separation-of-concern rules or API contracts to ensure AI-generated code doesn't bypass middleware.</li>
+                    <li><strong>The Data Engineer:</strong> Maintain a living "Data Dictionary" rulebook that dictates naming conventions for database tables and columns.</li>
+                </ul>
+
+                <h3>Getting Started</h3>
+                <ol>
+                    <li>Use the global search (<strong>Cmd/Ctrl + P</strong>) or click <strong>+ New Document</strong> to create a ruleset.</li>
+                    <li>Utilize the segmented view toggle in the top right to adjust your workspace:
+                        <ul>
+                            <li><strong>Edit (Left icon):</strong> Maximizes the raw text editor.</li>
+                            <li><strong>Split (Center icon):</strong> Shows text alongside a live, formatted preview.</li>
+                            <li><strong>Read-Only (Right icon):</strong> Locks the document for safe viewing.</li>
+                        </ul>
+                    </li>
+                    <li>If creating a standard manifest, click the <strong>Jumpstart</strong> button on a Template document to instantly clone a boilerplate structure.</li>
+                    <li>If you make a mistake, click the <strong>History</strong> button to view the append-only ledger and restore a previous snapshot.</li>
+                </ol>
+
+                <hr>
+
+                <h2 id="codebase-explorer">Code Blueprint (Codebase Explorer)</h2>
+
+                <h3>What It Is</h3>
+                <p>An interactive, geometric map of your physical file system and dependency graph. It transforms a list of folders into a visual blueprint.</p>
+
+                <h3>How You'll Benefit</h3>
+                <p>It allows you to look at your software and immediately understand its complexity without reading a single line of code. You can visually identify exactly which files are executing logic, handling data, or rendering interfaces.</p>
+
+                <h3>Targeted Use Cases</h3>
+                <ul>
+                    <li><strong>The Seasoned Architect:</strong> Click a core logic file and check the "Localized Execution Flow" panel to verify that an AI didn't mistakenly wire a database file directly to a user interface view.</li>
+                    <li><strong>The Entry-Level Developer:</strong> Visually trace how a single configuration file impacts downstream components.</li>
+                </ul>
+
+                <h3>Getting Started</h3>
+                <ol>
+                    <li>Use the <strong>Refresh Icon</strong> to rebuild the graph instantly if you've added new files.</li>
+                    <li>Check the <strong>Syntax Legend</strong> to understand the color-coding (e.g., Blue for Logic, Orange for Data).</li>
+                    <li>Use the <strong>Search Bar</strong> to instantly locate and jump to a specific file within massive directory trees.</li>
+                    <li>Click any node to view its architectural purpose and execution flow in the right-hand metadata inspector.</li>
+                </ol>
+
+                <hr>
+
+                <h2 id="schema-visualizer">Database Map (Schema Visualizer)</h2>
+
+                <h3>What It Is</h3>
+                <p>Transforms your raw database creation scripts into a live, interactive map of your relational data warehouse.</p>
+
+                <h3>How You'll Benefit</h3>
+                <p>It provides a macro-level view of your data integrity. By seeing how tables connect via foreign keys, you can ensure that AI-generated data structures aren't leaving "orphaned" records.</p>
+
+                <h3>Targeted Use Cases</h3>
+                <ul>
+                    <li><strong>The Data Engineer:</strong> Quickly audit a massive legacy database to understand relationships before writing complex migration scripts.</li>
+                    <li><strong>The Entry-Level Developer:</strong> Visually understand the difference between a core "Root" table and a dependent "Child" table.</li>
+                </ul>
+
+                <h3>Getting Started</h3>
+                <ol>
+                    <li>Click a solid circle (Root Table) or hollow circle (Child Table) to instantly highlight its entire family tree, dimming out the rest of the warehouse.</li>
+                    <li>Click the <strong>Recenter Icon</strong> to snap the canvas back to the default zoom and position if you get lost exploring a massive schema.</li>
+                    <li>Use the <strong>Copy Icon</strong> in the Data Definition panel to grab the exact creation script for the currently selected table to paste into an AI prompt.</li>
+                </ol>
+
+                <hr>
+
+                <h2 id="context-compressor">AI Exporter (Context Compressor)</h2>
+
+                <h3>What It Is</h3>
+                <p>Your outbound data engine. It reads your local files, mathematically strips out useless blank spaces and developer notes, and packages the code into a dense payload optimized for an AI's context window.</p>
+
+                <h3>How You'll Benefit</h3>
+                <p>AI models have strict limits on how much text they can process at once. The Compressor acts like a vacuum-seal bag, shrinking your code down so you can feed the AI massive amounts of context without hitting limits or paying for wasted whitespace.</p>
+
+                <h3>Targeted Use Cases</h3>
+                <ul>
+                    <li><strong>The Seasoned Architect:</strong> Select massive global configuration files and minify them to maintain deep context for the AI without flooding the prompt.</li>
+                    <li><strong>The Entry-Level Developer:</strong> Select only the two or three files actively causing a bug, ensuring the AI focuses only on the relevant logic.</li>
+                </ul>
+
+                <h3>Getting Started</h3>
+                <ol>
+                    <li>Check the boxes next to the files you need in the <strong>Project Files</strong> tree.</li>
+                    <li>Configure your compression switches:
+                        <ul>
+                            <li><strong>Aggressive Whitespace Pruning:</strong> Strips heavy indentation.</li>
+                            <li><strong>Scrub Comments:</strong> Removes outdated developer notes to keep the AI focused on the active execution path.</li>
+                            <li><strong>JSON Minification:</strong> Flattens large data objects into a single line.</li>
+                            <li><strong>Format via XML Tags:</strong> Wraps files in definitive boundaries to prevent the AI from blurring file logic together.</li>
+                        </ul>
+                    </li>
+                    <li>Click <strong>Copy Payload</strong> and paste it directly into your AI chat interface. Use <strong>Clear Stage</strong> to reset for your next prompt.</li>
+                </ol>
+
+                <hr>
+
+                <h2 id="payload-integrator">AI Importer (Payload Integrator)</h2>
+
+                <h3>What It Is</h3>
+                <p>The most powerful and heavily guarded module in the system. It is a quarantine airlock designed to safely catch AI-generated code, validate it, and write it directly to your hard drive.</p>
+                
+                <h3>How You'll Benefit</h3>
+                <p>It completely eliminates the tedious, error-prone process of manually copying and pasting AI code across dozens of files by hand. It features atomic safety checks to prevent broken or truncated code from crashing your application.</p>
+
+                <h3>Targeted Use Cases</h3>
+                <ul>
+                    <li><strong>The Seasoned Architect:</strong> Execute massive, multi-file refactors simultaneously while relying on the Integrator's native backup system to create a restorable snapshot of the exact millisecond before the overwrite.</li>
+                    <li><strong>The Entry-Level Developer:</strong> Catch silent AI errors. If the AI hallucinates a syntax error, the Integrator will lock down and refuse to write to your disk.</li>
+                </ul>
+
+                <h3>Getting Started</h3>
+                <ol>
+                    <li>Paste the AI's generated response into the <strong>Ingest JSON Payload</strong> text area.</li>
+                    <li>Click <strong>Validate & Parse</strong>. The system will scan the code for syntax errors or truncation.</li>
+                    <li>If validation passes, review the staged files in the <strong>Pre-Flight Review</strong> panel. Click the <strong>Eye Icon</strong> to preview the raw changes.</li>
+                    <li>Click <strong>Integrate to Codebase</strong> to safely push the updates to your local files.</li>
+                </ol>
+
+                <hr>
+
+                <h2 id="llm-code-review">AI Code Review (Auditing)</h2>
+
+                <h3>What It Is</h3>
+                <p>Reviewing code written by an AI is fundamentally different from reviewing code written by a human. While human engineers usually make localized logic or syntax errors, Language Models are notorious for making <strong>macro-architectural errors</strong> because they lack a persistent, global understanding of your entire ecosystem.</p>
+
+                <h3>How You'll Benefit</h3>
+                <p>Instead of manually reading thousands of lines of AI-generated code to spot a hidden vulnerability, the visualizer modules act as your macro-level linters. They instantly translate the AI's raw output into geometric blueprints, allowing you to visually verify the structural integrity of your software before a payload ever hits production.</p>
+
+                <h3>Getting Started</h3>
+                <p><strong>Use Case: Catching Dependency Violations</strong></p>
+                <ol>
+                    <li><strong>Refresh the Graph:</strong> After executing a payload, click the <strong>Refresh Graph</strong> button in the Codebase Explorer header.</li>
+                    <li><strong>Select the Node:</strong> Click on the newly generated UI component.</li>
+                    <li><strong>Audit the Execution:</strong> Look at the execution flow in the right panel. If you see a dependency line connecting the UI file directly to a database manager, the AI bypassed your backend security layers. You have instantly caught a critical architectural violation without reading a single line of code.</li>
+                </ol>
+
+                <hr>
+
+                <h2 id="quick-tasks">Global Quick Tasks</h2>
+
+                <h3>What It Is</h3>
+                <p>The Quick Tasks sidebar is a persistent utility accessible from anywhere in the command center. It acts as your short-term memory buffer.</p>
+
+                <h3>How You'll Benefit</h3>
+                <p>It protects your flow state. If you are deep in a complex workflow and suddenly remember an unrelated task (like "Email the client"), you don't have to close what you are doing to log it. Just press <code>Cmd/Ctrl + T</code> to slide open the panel, type it in, and get right back to work.</p>
+
+                <h3>Getting Started</h3>
+                <ol>
+                    <li>Press <code>Cmd/Ctrl + T</code> to slide open the Quick Tasks panel without leaving your current screen.</li>
+                    <li>Type your thought and hit Enter. Close the panel and immediately return to your primary task.</li>
+                    <li>Later, if that task becomes a massive refactoring job, go to your Kanban boards, select "My Quick Tasks", and use the "Promote" button to convert that list into its own dedicated project board.</li>
+                </ol>
+
+                <hr>
+
+                <h2 id="global-scratchpad">Global Scratchpad</h2>
+
+                <h3>What It Is</h3>
+                <p>A persistent, floating notepad that exists completely independently of your current view. It features automatic saving and allows you to format text with bolding, lists, and code blocks.</p>
+
+                <h3>How You'll Benefit</h3>
+                <p>It is the perfect staging area for drafting long, complex instructions for an AI. You can pop it open, draft your thoughts, verify they are formatted correctly, and copy them to your clipboard—all without leaving your current map or workspace.</p>
+
+                <h3>Getting Started</h3>
+                <ol>
+                    <li>Press <code>Cmd/Ctrl + Shift + S</code> from anywhere in the application to open the pad.</li>
+                    <li>Draft your prompt using standard Markdown for code blocks, bullet points, and headers.</li>
+                    <li>Click "Split View" to compile the Markdown into formatted text. This ensures your code blocks and instructions are perfectly structured.</li>
+                    <li>Click the "Copy" icon in the footer to instantly grab the raw text, then press <code>Cmd/Ctrl + Shift + S</code> to hide the pad. You can now paste your formatted prompt directly into your AI.</li>
+                </ol>
+
+                <hr>
+
+                <h2 id="data-management">Workspace Hub & Data Management</h2>
+
+                <h3>What It Is</h3>
+                <p>The administrative layer for managing multiple, isolated project environments (Multi-Tenancy) and ensuring total data sovereignty. Because the OS operates locally on your machine, you are entirely in control of your own data.</p>
+
+                <h3>How You'll Benefit</h3>
+                <p>You can seamlessly switch between entirely different software projects without cross-contaminating your architecture rules or Kanban boards. You can also generate portable backups to move between computers.</p>
+
+                <h3>Getting Started</h3>
+                <ol>
+                    <li>Use the <strong>Workspace Hub</strong> to <strong>Initialize Project</strong> environments. This creates a fresh, isolated sandbox for a new software endeavor.</li>
+                    <li>Click <strong>Sync Telemetry</strong> to update the visual charts tracking your prompt efficiency and token savings over time.</li>
+                    <li>Navigate to the <strong>Data Management</strong> module to instantly generate, export, or restore compressed backups of your entire local database ecosystem with a single click.</li>
+                </ol>
+
+                <hr>
+
+                <h2 id="technical-appendix">Technical Appendix & Templates</h2>
+                <p>This section is reserved for software engineers and systems architects. It contains the raw prompt templates, regex execution rules, and compression heuristics required to orchestrate the deeper AI integrations.</p>
+
+                <h3>1. Regular Expressions (Regex) in Architecture Search</h3>
+                <p>By default, the Search & Replace engine in the Architecture Workspace treats every character literally. This is an intentional safety design to prevent the system from confusing your code blocks with Regex commands.</p>
+                <p>If you need to execute a programmatic search, click the <strong>.*</strong> (Regex Toggle) button inside the search input. This bypasses the literal escape sequence and activates the raw Regex engine.</p>
+                <ul>
+                    <li><strong>Find Any Number:</strong> Enable the <code>.*</code> toggle and type <code>[0-9]</code> to highlight every single digit in the document.</li>
+                    <li><strong>Find All Headers:</strong> Enable the <code>.*</code> toggle and type <code>^#+\s</code> to find every Markdown header.</li>
+                    <li><strong>Locate Developer Tags:</strong> Enable the <code>.*</code> toggle and type <code>(TODO|FIXME|NOTE):</code> to quickly jump between action items embedded in your text.</li>
+                </ul>
+
+                <h3>2. Codebase Explorer: Manifest Orchestration</h3>
+                <p>Writing XML by hand is tedious. Instead, leverage your AI to parse your raw directory tree and autonomously orchestrate a richly detailed manifest for your visualizer.</p>
+                <p>Paste your raw text tree into your AI, followed by this strict instruction prompt:</p>
+                <blockquote>
+<pre style="white-space: pre-wrap; font-family: monospace; font-size: 13px; line-height: 1.5; color: var(--text-color);">
+I am providing my physical directory tree. I need you to orchestrate an enhanced `codebase.xml` manifest for my architectural visualizer.
+
+Follow these strict rules:
+1. Wrap the entire output in a root `&lt;codebase&gt;` tag.
+2. Mirror my exact directory structure using nested `&lt;directory name="..."&gt;` and `&lt;file name="..." status="active"&gt;` tags.
+3. For every file, write a `&lt;description&gt;` (its standard purpose) and a `&lt;visualizer-description&gt;` (its architectural significance).
+4. Map the execution flow by listing comma-separated dependencies in `&lt;inputs&gt;` and downstream consumers in `&lt;outputs&gt;`. Use exact filenames. If none, write "None".
+5. Do NOT output markdown formatting around the XML block. Give me the raw XML only.
+</pre>
+                </blockquote>
+
+                <h3>3. Schema Visualizer: Metadata Injection</h3>
+                <p>You can instruct your AI to inject visualizer metadata into your database schema for you.</p>
+                <p>Paste the generated payload into your AI, followed by this exact, strict instruction prompt:</p>
+                <blockquote>
+<pre style="white-space: pre-wrap; font-family: monospace; font-size: 13px; line-height: 1.5; color: var(--text-color);">
+I am providing my master database schema. I need you to enhance it with specific metadata tags for my architectural visualizer.
+
+Follow these strict rules:
+1. Add an `-- @domain: [Domain Name]` tag immediately above every table creation statement to logically group related tables (e.g., User Management, Billing, Core System).
+2. Add a standard code comment immediately below the domain tag and above the table creation statement explaining the architectural purpose of the table.
+3. CRITICAL: Do NOT leave blank lines between the domain tag, the description comment, and the creation statement. They must be a single contiguous block.
+4. Do NOT alter the actual logic, data types, constraints, or foreign keys. Only inject the comment blocks.
+</pre>
+                </blockquote>
+
+                <h3>4. Context Compressor: JSON Minification Heuristics</h3>
+                <p>If you're wondering why the 'Minify JSON Payloads' switch rarely reduces the mathematical token count, here is a technical explanation:</p>
+                <ul>
+                    <li><strong>The Pipeline Execution Order:</strong> The whitespace rule runs before the minifier. Because beautifully formatted objects are mostly leading spaces (indentation), the whitespace regex aggressively strips that out first. It cannibalizes the fat before the minifier even touches it.</li>
+                    <li><strong>The Math Heuristic:</strong> The minifier essentially only has newline characters left to remove. Removing 1,000 newlines saves 1,000 characters. Divided by a standard characters-per-token heuristic, that's a mathematically invisible shift on a massive gauge.</li>
+                    <li><strong>The File Extension Gate:</strong> The logic strictly gates itself behind specific file extensions. Massive configuration objects inside standard logic files bypass the minifier completely.</li>
+                </ul>
+                <p><strong>Should you keep the toggle on?</strong> Absolutely. Production tokenizers process raw newline characters and syntax boundaries differently than our local heuristic. Flattening a massive array into a single string forces the AI's attention mechanisms to focus entirely on key-value data relationships rather than traversing vertical formatting structure.</p>
+
+            </article>
+        </main>
+    </div>
+
+    <script src="js/documentation.js"></script>
+</body>
+</html>

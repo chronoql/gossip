@@ -1,0 +1,606 @@
+/**
+ * Project: Chronoql Gossip
+ * Module: Codebase Explorer Styles
+ * Phase: 7 (Visualization Modules)
+ */
+
+/* ==========================================
+   MACRO LAYOUT & SPLIT PANE
+   ========================================= */
+.explorer-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background-color: var(--bg-color);
+}
+
+.split-pane-layout {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.codebase-stage-left {
+    width: var(--cb-left-width, 50%);
+    flex: none;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    background-color: var(--surface-color);
+}
+
+.codebase-stage-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+/* ==========================================
+   RESIZER HANDLES
+   ========================================= */
+.vertical-drag-handle {
+    width: 6px;
+    background-color: var(--border-color);
+    cursor: col-resize;
+    z-index: 10;
+    transition: background-color 0.2s;
+    flex-shrink: 0;
+}
+.vertical-drag-handle:hover, .vertical-drag-handle.is-resizing {
+    background-color: var(--accent-color);
+}
+
+.horizontal-drag-handle {
+    height: 6px;
+    background-color: var(--border-color);
+    cursor: row-resize;
+    z-index: 10;
+    transition: background-color 0.2s;
+    flex-shrink: 0;
+}
+.horizontal-drag-handle:hover, .horizontal-drag-handle.is-resizing {
+    background-color: var(--accent-color);
+}
+
+/* ==========================================
+   LOCAL HEADERS & D3 MOUNT SURFACES
+   ========================================= */
+.stage-header-local {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    background-color: var(--surface-color);
+    border-bottom: 1px solid var(--border-color);
+    z-index: 10;
+}
+
+.stage-header-local h2 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-color);
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* --- INJECTED SEARCH BAR (D3 TREE) --- */
+.explorer-search-bar {
+    padding: 10px 20px;
+    background-color: var(--bg-color);
+    border-bottom: 1px solid var(--border-color);
+    flex-shrink: 0;
+    z-index: 9;
+}
+
+.tree-search-wrapper {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 6px 12px;
+    gap: 10px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    position: relative; 
+}
+
+.tree-search-wrapper:focus-within {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
+}
+
+.tree-search-wrapper svg {
+    color: var(--text-muted);
+    flex-shrink: 0;
+}
+
+.tree-search-wrapper input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--text-color);
+    outline: none;
+    font-size: 13px;
+    font-family: inherit;
+    min-width: 0; 
+}
+
+.tree-search-wrapper input::placeholder {
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+/* --- REGEX TOGGLE BUTTON --- */
+.regex-toggle-btn {
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--text-muted);
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-family: monospace;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+    margin-left: 4px;
+}
+
+.regex-toggle-btn:hover {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    border-color: var(--border-color);
+}
+
+.regex-toggle-btn[data-active="true"] {
+    background-color: var(--accent-color);
+    color: #ffffff;
+    border-color: var(--accent-color);
+}
+
+/* --- CUSTOM AUTOCOMPLETE DROPDOWN --- */
+.custom-autocomplete-dropdown {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    width: 100%;
+    max-height: 40vh; 
+    overflow-y: auto;
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+}
+
+.custom-autocomplete-dropdown::-webkit-scrollbar {
+    width: 6px;
+}
+.custom-autocomplete-dropdown::-webkit-scrollbar-track {
+    background: transparent;
+}
+.custom-autocomplete-dropdown::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+}
+body.dark-mode .custom-autocomplete-dropdown::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.dropdown-item {
+    padding: 8px 12px;
+    font-size: 13px;
+    color: var(--text-color);
+    cursor: pointer;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.1s ease, color 0.1s ease;
+}
+
+.dropdown-item:last-child {
+    border-bottom: none;
+}
+
+.dropdown-item:hover, 
+.dropdown-item.focused {
+    background-color: var(--accent-color);
+    color: #ffffff;
+}
+
+.dropdown-empty {
+    padding: 12px;
+    font-size: 13px;
+    color: var(--text-muted);
+    font-style: italic;
+    text-align: center;
+}
+
+/* ------------------------------------- */
+
+.d3-mount-surface {
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    background-color: var(--bg-color);
+    cursor: grab;
+}
+
+.d3-mount-surface:active {
+    cursor: grabbing;
+}
+
+/* ==========================================
+   SYNTAX LEGEND DRAWER (SLIDE-OUT)
+   ========================================= */
+.syntax-legend-drawer {
+    position: absolute;
+    top: 0;
+    right: -320px;
+    width: 320px;
+    height: 100%;
+    background-color: var(--surface-color);
+    border-left: 1px solid var(--border-color);
+    box-shadow: -4px 0 15px rgba(0, 0, 0, 0.1);
+    transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+}
+
+.syntax-legend-drawer.open {
+    right: 0;
+}
+
+.legend-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--bg-color);
+}
+
+.legend-header h3 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.legend-body {
+    padding: 20px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.legend-section-title {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    margin: 0 0 12px 0;
+}
+
+.legend-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.legend-list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--text-color);
+}
+
+.legend-divider {
+    border: none;
+    border-top: 1px solid var(--border-color);
+    margin: 20px 0;
+}
+
+/* Geometric Syntax Definitions (HTML Legend & SVG Nodes) */
+.shape-ref {
+    display: inline-block;
+}
+
+/* Directories */
+.shape-rect {
+    width: 16px;
+    height: 16px;
+    background-color: #38bdf8;
+    border: 2px solid #0284c7;
+    border-radius: 2px;
+}
+
+/* Logic & Scripts */
+.shape-diamond {
+    width: 14px;
+    height: 14px;
+    background-color: #facc15; /* Yellow */
+    border: 2px solid #ca8a04;
+    transform: rotate(45deg);
+}
+
+/* Data & Storage */
+.shape-circle {
+    width: 16px;
+    height: 16px;
+    background-color: #f59e0b; /* Orange */
+    border: 2px solid #b45309;
+    border-radius: 50%;
+}
+
+/* View & Presentation */
+.shape-hex {
+    width: 18px;
+    height: 10px;
+    background-color: #a855f7;
+    position: relative;
+    margin: 4px 0;
+}
+.shape-hex::before, .shape-hex::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+}
+.shape-hex::before {
+    bottom: 100%;
+    border-bottom: 5px solid #a855f7;
+}
+.shape-hex::after {
+    top: 100%;
+    border-top: 5px solid #a855f7;
+}
+
+/* Styling */
+.shape-pill {
+    width: 20px;
+    height: 12px;
+    background-color: #ec4899;
+    border: 2px solid #be185d;
+    border-radius: 10px;
+}
+
+/* Config & Infrastructure */
+.shape-octagon {
+    width: 16px;
+    height: 16px;
+    background-color: #10b981; /* Green */
+    position: relative;
+    clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+}
+/* Fake border for clip-path */
+.shape-octagon::before {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    right: 2px;
+    bottom: 2px;
+    background-color: #10b981;
+    clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+    box-shadow: inset 0 0 0 2px #047857; /* The inner border color */
+}
+
+/* Generic Fallback */
+.shape-generic {
+    width: 12px;
+    height: 12px;
+    background-color: #94a3b8; /* Slate Gray */
+    border: 2px solid #475569;
+    border-radius: 1px;
+}
+
+
+/* ==========================================
+   RIGHT STAGE: METADATA PANELS
+   ========================================= */
+.inspector-panel {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-color);
+}
+
+.cb-panel-top {
+    height: var(--cb-top-height, 50%);
+    flex: none;
+}
+
+.cb-panel-bottom {
+    flex: 1;
+    height: auto;
+    border-bottom: none;
+}
+
+.panel-header {
+    padding: 12px 20px;
+    background-color: var(--surface-color);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.header-title-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px; 
+}
+
+.panel-header h2 {
+    font-size: 16px; 
+    font-weight: 800; 
+    color: var(--text-color);
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.header-subtitle {
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+/* HIGH-CONTRAST METADATA BADGE */
+.selected-node-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 12px;
+    background-color: var(--border-color);
+    color: var(--text-color);
+    font-size: 11px;
+    font-weight: 600;
+    font-family: monospace;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    align-self: flex-start;
+}
+
+.selected-node-badge.active-badge {
+    background-color: #15803d; 
+    color: #ffffff; 
+    border: none;
+}
+
+.metadata-content {
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.meta-group h4 {
+    margin: 0 0 8px 0;
+    font-size: 12px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.meta-text {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--text-color);
+}
+
+.empty-state-text {
+    color: var(--text-muted);
+    font-style: italic;
+    font-size: 13px;
+}
+
+.meta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.meta-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.meta-tag {
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    color: var(--text-color);
+    font-family: monospace;
+}
+
+.empty-tag {
+    background-color: transparent;
+    border: 1px dashed var(--border-color);
+    color: var(--text-muted);
+}
+
+/* ==========================================
+   DAG (DIRECTED ACYCLIC GRAPH) SURFACE
+   ========================================= */
+.dag-surface {
+    background-color: var(--surface-color);
+    box-shadow: inset 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.empty-state-local {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    color: var(--text-muted);
+    text-align: center;
+}
+
+.empty-state-local p {
+    margin: 0;
+    font-size: 13px;
+}
+
+/* ==========================================
+   D3.js SVG INJECTIONS & HIGH-CONTRAST STATES
+   ========================================= */
+.node circle,
+.node rect,
+.node path,
+.node polygon {
+    transition: all 0.2s ease;
+}
+
+.node text {
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 12px;
+    fill: var(--text-color);
+}
+
+.link {
+    fill: none;
+    stroke: var(--border-color);
+    stroke-width: 1.5px;
+    transition: stroke 0.2s ease;
+}
+
+/* ULTRA-HIGH-CONTRAST SELECTION STATE */
+/* Removed the black stroke so it does not conflict with the JS animation pulse */
+.node.selected circle,
+.node.selected rect,
+.node.selected path,
+.node.selected polygon {
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+.node.selected text {
+    font-weight: 800; 
+    fill: #0f172a; 
+}
